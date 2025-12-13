@@ -1,0 +1,141 @@
+"use client"
+
+import { Card } from "@/components/ui/card"
+import { MeetingSummaries } from "@/components/meeting-summaries"
+import { InsightsPanel } from "@/components/insights-panel"
+import { HighlightsPanel } from "@/components/highlights-panel"
+import { TechnicalSummaries } from "@/components/technical-summaries"
+import { TrendingUp, DollarSign, Users, Target, BarChart3 } from "lucide-react"
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
+
+const monthlyRevenue = [
+  { month: "Ene", revenue: 45000 },
+  { month: "Feb", revenue: 52000 },
+  { month: "Mar", revenue: 48000 },
+  { month: "Abr", revenue: 61000 },
+  { month: "May", revenue: 55000 },
+  { month: "Jun", revenue: 67000 },
+]
+
+const salesByCategory = [
+  { category: "Integraciones", count: 15 },
+  { category: "Analytics", count: 12 },
+  { category: "Automatización", count: 9 },
+  { category: "CRM", count: 7 },
+]
+
+export function SalesDashboard() {
+  return (
+    <div className="container mx-auto px-6 py-16 max-w-7xl">
+      <div className="text-center max-w-4xl mx-auto mb-20">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/50 rounded-full mb-6">
+          <div className="h-2 w-2 bg-primary rounded-full animate-pulse" />
+          <span className="text-sm font-medium text-foreground">Dashboard de Ventas</span>
+        </div>
+        <h1 className="text-5xl font-bold text-foreground mb-6 leading-tight text-balance">
+          Gestiona tus clientes y oportunidades en un solo lugar
+        </h1>
+        <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+          Accede a resúmenes de reuniones generados por IA, insights relevantes y oportunidades de venta identificadas
+          automáticamente.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+        <Card className="p-6 border-border/50 hover:border-primary/30 transition-all hover:shadow-lg">
+          <div className="flex items-center justify-between mb-3">
+            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+              <Users className="h-5 w-5 text-primary" />
+            </div>
+            <TrendingUp className="h-4 w-4 text-green-500" />
+          </div>
+          <div className="text-3xl font-bold text-foreground mb-1">24</div>
+          <p className="text-sm text-muted-foreground">Reuniones este mes</p>
+        </Card>
+
+        <Card className="p-6 border-border/50 hover:border-primary/30 transition-all hover:shadow-lg">
+          <div className="flex items-center justify-between mb-3">
+            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+              <Target className="h-5 w-5 text-primary" />
+            </div>
+            <TrendingUp className="h-4 w-4 text-green-500" />
+          </div>
+          <div className="text-3xl font-bold text-primary mb-1">12</div>
+          <p className="text-sm text-muted-foreground">Oportunidades activas</p>
+        </Card>
+
+        <Card className="p-6 border-border/50 hover:border-primary/30 transition-all hover:shadow-lg">
+          <div className="flex items-center justify-between mb-3">
+            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+              <BarChart3 className="h-5 w-5 text-primary" />
+            </div>
+          </div>
+          <div className="text-3xl font-bold text-foreground mb-1">8</div>
+          <p className="text-sm text-muted-foreground">Prioridades pendientes</p>
+        </Card>
+
+        <Card className="p-6 border-border/50 hover:border-primary/30 transition-all hover:shadow-lg">
+          <div className="flex items-center justify-between mb-3">
+            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+              <DollarSign className="h-5 w-5 text-primary" />
+            </div>
+            <TrendingUp className="h-4 w-4 text-green-500" />
+          </div>
+          <div className="text-3xl font-bold text-foreground mb-1">$67K</div>
+          <p className="text-sm text-muted-foreground">Revenue este mes</p>
+        </Card>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        <Card className="p-6 border-border/50">
+          <h3 className="text-lg font-semibold text-foreground mb-6">Revenue Mensual</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={monthlyRevenue}>
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+              <XAxis dataKey="month" stroke="hsl(var(--muted-foreground))" />
+              <YAxis stroke="hsl(var(--muted-foreground))" />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "hsl(var(--card))",
+                  border: "1px solid hsl(var(--border))",
+                  borderRadius: "8px",
+                }}
+              />
+              <Line type="monotone" dataKey="revenue" stroke="hsl(var(--primary))" strokeWidth={2} />
+            </LineChart>
+          </ResponsiveContainer>
+        </Card>
+
+        <Card className="p-6 border-border/50">
+          <h3 className="text-lg font-semibold text-foreground mb-6">Ventas por Categoría</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={salesByCategory}>
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+              <XAxis dataKey="category" stroke="hsl(var(--muted-foreground))" />
+              <YAxis stroke="hsl(var(--muted-foreground))" />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "hsl(var(--card))",
+                  border: "1px solid hsl(var(--border))",
+                  borderRadius: "8px",
+                }}
+              />
+              <Bar dataKey="count" fill="hsl(var(--primary))" radius={[8, 8, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </Card>
+      </div>
+
+      <div className="space-y-16">
+        <MeetingSummaries />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <HighlightsPanel />
+          <InsightsPanel />
+        </div>
+
+        <TechnicalSummaries />
+      </div>
+    </div>
+  )
+}
