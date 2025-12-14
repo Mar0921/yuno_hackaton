@@ -7,10 +7,11 @@ import { TechnicalDashboard } from "@/components/technical-dashboard"
 import { DocumentsPage } from "@/components/documents-page"
 import { ChatPage } from "@/components/chat-page"
 import { AIChatbot } from "@/components/ai-chatbot"
+import { DynamicDashboardAndChat } from "@/components/dynamic-dashboard/dashboard-container"
 
 export default function Home() {
   const [userRole, setUserRole] = useState<"sales" | "technical">("sales")
-  const [currentView, setCurrentView] = useState<"home" | "dashboard" | "documents" | "chat">("home")
+  const [currentView, setCurrentView] = useState<"home" | "dashboard" | "documents" | "chat" | "ai-dashboard">("home")
 
   const toggleRole = () => {
     setUserRole(userRole === "sales" ? "technical" : "sales")
@@ -54,7 +55,14 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex justify-end">
-                  <h1 className="text-xl font-semibold text-foreground">ClientHub</h1>
+                  <h1 className="text-xl font-semibold text-foreground mr-4">ClientHub</h1>
+                  <button
+                    onClick={() => setCurrentView("ai-dashboard")}
+                    className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2"
+                  >
+                    <span className="hidden md:inline">✨ Context Core</span>
+                    <span className="md:hidden">✨</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -62,6 +70,7 @@ export default function Home() {
 
           <main className="pb-20">
             {currentView === "dashboard" && (userRole === "sales" ? <SalesDashboard userRole={userRole} /> : <TechnicalDashboard userRole={userRole} />)}
+            {currentView === "ai-dashboard" && <div className="container mx-auto px-6 py-8"><DynamicDashboardAndChat /></div>}
             {currentView === "documents" && <DocumentsPage userRole={userRole!} />}
             {currentView === "chat" && <ChatPage />}
           </main>
