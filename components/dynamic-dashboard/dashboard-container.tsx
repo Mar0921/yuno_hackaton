@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card"
 import { Bot, Send, Loader2, Sparkles, User, Clock } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 interface Message {
     id: string
@@ -25,6 +26,7 @@ interface DashboardEntry {
 }
 
 export function DynamicDashboardAndChat() {
+    const [selectedMerchant, setSelectedMerchant] = useState<string | null>(null)
     const [messages, setMessages] = useState<Message[]>([
         { id: '0', role: 'assistant', content: 'Soy Yuno Context Core. Pídeme cualquier análisis de negocio o visualización. Los resultados se guardarán aquí.' }
     ])
@@ -53,50 +55,47 @@ export function DynamicDashboardAndChat() {
         scrollToDashboardBottom()
     }, [dashboardHistory])
 
-    // Auto-initialize dashboard with Zoop Context
-    useEffect(() => {
-        const initDashboard = async () => {
-            // Avoid double init if already populated (optional check)
-            if (dashboardHistory.length > 0) return;
+    const initDashboard = async () => {
+        // Avoid double init if already populated (optional check)
+        if (dashboardHistory.length > 0) return;
 
-            const initialPrompt = "Genera el Dashboard General del Merchant Overview. Incluye los KPIs principales, los gráficos de ingresos y ventas por categoría, y los resúmenes de reuniones con sus tags y detalles.";
+        const initialPrompt = "Genera el Dashboard General del Merchant Overview. Incluye los KPIs principales, los gráficos de ingresos y ventas por categoría, y los resúmenes de reuniones con sus tags y detalles.";
 
-            // We manually inject the user message 'state' but don't strictly need to show it in the chat history 
-            // if we want it to feel 'native', but showing it puts context provided by user.
-            // Let's show it as a system welcome or similar.
-
-            setIsLoading(true);
-            try {
-                const response = await generateDashboardConfig(initialPrompt);
-                if (response.display_config) {
-                    const newEntry: DashboardEntry = {
-                        id: 'init-0', // special ID
-                        query: "Dashboard General: Merchant Overview", // Display text for the history item
-                        timestamp: new Date(),
-                        config: response.display_config,
-                        businessAnswer: response.business_answer
-                    }
-                    setDashboardHistory([newEntry]);
-                    setMessages(prev => [...prev, {
-                        id: 'init-response',
-                        role: 'assistant',
-                        content: response.chat_message || "He cargado el estado actual de Zoop basado en la información disponible."
-                    }]);
+        setIsLoading(true);
+        try {
+            const response = await generateDashboardConfig(initialPrompt);
+            if (response.display_config) {
+                const newEntry: DashboardEntry = {
+                    id: 'init-0',
+                    query: "Dashboard General: Merchant Overview",
+                    timestamp: new Date(),
+                    config: response.display_config,
+                    businessAnswer: response.business_answer
                 }
-            } catch (e) {
-                console.error("Auto-init failed", e);
-            } finally {
-                setIsLoading(false);
+                setDashboardHistory([newEntry]);
+                setMessages(prev => [...prev, {
+                    id: 'init-response',
+                    role: 'assistant',
+                    content: response.chat_message || "He cargado el estado actual basado en la información disponible."
+                }]);
             }
-        };
+        } catch (e) {
+            console.error("Auto-init failed", e);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
-        // Small delay to ensure mount
-        const timer = setTimeout(initDashboard, 500);
-        return () => clearTimeout(timer);
-    }, []);
+    // Auto-initialize when merchant is selected
+    useEffect(() => {
+        if (selectedMerchant) {
+            const timer = setTimeout(initDashboard, 500);
+            return () => clearTimeout(timer);
+        }
+    }, [selectedMerchant]);
 
     const handleSend = async () => {
-        if (!input.trim() || isLoading) return
+        if (!input.trim() || isLoading || !selectedMerchant) return
 
         const userMsg = input
         setInput("")
@@ -149,12 +148,25 @@ export function DynamicDashboardAndChat() {
                 {/* Main Area: Dynamic Dashboard Feed */}
                 <ResizablePanel defaultSize={70} minSize={30}>
                     <div className="flex flex-col h-full bg-card/30">
-                        <div className="p-4 border-b border-border/50 flex justify-between items-center bg-muted/20">
-                            <h2 className="font-semibold flex items-center gap-2">
-                                <Clock className="w-4 h-4 text-primary" />
-                                Historial de Análisis
-                            </h2>
-                            <span className="text-xs text-muted-foreground">{dashboardHistory.length} resultados</span>
+                        <div className="p-4 border-b border-border/50 bg-muted/20">
+                            <div className="flex justify-between items-center mb-4">
+                                <h2 className="font-semibold flex items-center gap-2">
+                                    <Clock className="w-4 h-4 text-primary" />
+                                    Historial de Análisis
+                                </h2>
+                                <span className="text-xs text-muted-foreground">{dashboardHistory.length} resultados</span>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <label className="text-sm font-medium text-foreground">Merchant:</label>
+                                <Select value={selectedMerchant || ""} onValueChange={setSelectedMerchant}>
+                                    <SelectTrigger className="w-48">
+                                        <SelectValue placeholder="Select merchant" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="MediLink360">MediLink360</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
                         </div>
                         <div className="h-full p-6 bg-secondary/20 overflow-y-auto">
                             {/* Render ONLY the last entry if exists, otherwise show empty state or loading */}
@@ -261,11 +273,11 @@ export function DynamicDashboardAndChat() {
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
                                     onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                                    placeholder="Escribe tu consulta..."
-                                    disabled={isLoading}
+                                    placeholder={selectedMerchant ? "Escribe tu consulta..." : "Selecciona un merchant primero"}
+                                    disabled={isLoading || !selectedMerchant}
                                     className="bg-background"
                                 />
-                                <Button onClick={handleSend} disabled={isLoading || !input.trim()} size="icon">
+                                <Button onClick={handleSend} disabled={isLoading || !input.trim() || !selectedMerchant} size="icon">
                                     <Send className="h-4 w-4" />
                                 </Button>
                             </div>

@@ -42,21 +42,34 @@ export function TechnicalStatsChart() {
         </div>
         <ResponsiveContainer width="100%" height={280}>
           <BarChart data={activityData}>
-            <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
-            <XAxis dataKey="name" className="text-xs" tick={{ fill: "#000000" }} />
-            <YAxis className="text-xs" tick={{ fill: "#000000" }} />
+            <CartesianGrid strokeDasharray="3 3" className="stroke-muted/50" vertical={false} />
+            <XAxis
+              dataKey="name"
+              stroke="#888888"
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+            />
+            <YAxis
+              stroke="#888888"
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+            />
             <Tooltip
+              cursor={{ fill: "hsl(var(--muted)/0.4)" }}
               contentStyle={{
-                backgroundColor: "hsl(var(--card))",
+                backgroundColor: "hsl(var(--popover))",
                 border: "1px solid hsl(var(--border))",
                 borderRadius: "8px",
-                color: "#000000",
+                color: "hsl(var(--popover-foreground))",
+                boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
               }}
             />
-            <Legend />
-            <Bar dataKey="changes" fill="#6366f1" name="Changes" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="errors" fill="#ef4444" name="Errors" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="improvements" fill="#10b981" name="Improvements" radius={[4, 4, 0, 0]} />
+            <Legend wrapperStyle={{ paddingTop: "20px" }} />
+            <Bar dataKey="changes" fill="hsl(var(--primary))" name="Changes" radius={[4, 4, 0, 0]} maxBarSize={40} />
+            <Bar dataKey="errors" fill="hsl(var(--destructive))" name="Errors" radius={[4, 4, 0, 0]} maxBarSize={40} />
+            <Bar dataKey="improvements" fill="hsl(var(--chart-2))" name="Improvements" radius={[4, 4, 0, 0]} maxBarSize={40} />
           </BarChart>
         </ResponsiveContainer>
       </Card>
@@ -69,47 +82,61 @@ export function TechnicalStatsChart() {
         </div>
         <ResponsiveContainer width="100%" height={280}>
           <LineChart data={performanceData}>
-            <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
-            <XAxis dataKey="name" className="text-xs" tick={{ fill: "hsl(var(--muted-foreground))" }} />
+            <CartesianGrid strokeDasharray="3 3" className="stroke-muted/50" vertical={false} />
+            <XAxis
+              dataKey="name"
+              stroke="#888888"
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+            />
             <YAxis
               yAxisId="left"
-              className="text-xs"
-              tick={{ fill: "#000000" }}
-              label={{ value: "ms", position: "insideLeft" }}
+              stroke="#888888"
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+              label={{ value: "ms", position: "insideLeft", fill: "#888888" }}
             />
             <YAxis
               yAxisId="right"
               orientation="right"
-              className="text-xs"
-              tick={{ fill: "#000000" }}
+              stroke="#888888"
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
               domain={[98, 100]}
-              label={{ value: "%", position: "insideRight" }}
+              label={{ value: "%", position: "insideRight", fill: "#888888" }}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "hsl(var(--card))",
+                backgroundColor: "hsl(var(--popover))",
                 border: "1px solid hsl(var(--border))",
                 borderRadius: "8px",
+                color: "hsl(var(--popover-foreground))",
+                boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
               }}
             />
-            <Legend />
+            <Legend wrapperStyle={{ paddingTop: "20px" }} />
             <Line
               yAxisId="left"
               type="monotone"
               dataKey="responseTime"
               stroke="hsl(var(--primary))"
-              strokeWidth={2}
+              strokeWidth={3}
               name="Response Time"
-              dot={{ fill: "hsl(var(--primary))" }}
+              dot={{ r: 4, fill: "hsl(var(--primary))", strokeWidth: 2, stroke: "hsl(var(--background))" }}
+              activeDot={{ r: 6, strokeWidth: 0 }}
             />
             <Line
               yAxisId="right"
               type="monotone"
               dataKey="uptime"
               stroke="hsl(var(--chart-3))"
-              strokeWidth={2}
+              strokeWidth={3}
               name="Uptime"
-              dot={{ fill: "hsl(var(--chart-3))" }}
+              dot={{ r: 4, fill: "hsl(var(--chart-3))", strokeWidth: 2, stroke: "hsl(var(--background))" }}
+              activeDot={{ r: 6, strokeWidth: 0 }}
             />
           </LineChart>
         </ResponsiveContainer>
