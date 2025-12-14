@@ -21,7 +21,7 @@ export function HomePage({
   onLogout,
 }: HomePageProps) {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#e2e8f1]">
       <header className="border-b border-border/40 bg-card/80 backdrop-blur-xl sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
@@ -62,7 +62,7 @@ export function HomePage({
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <Card
-            className="p-6 border border-border hover:border-primary cursor-pointer transition-all hover:shadow-lg"
+            className="p-6 border border-border hover:border-primary cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1"
             onClick={onNavigateToDashboard}
           >
             <BarChart3 className="h-10 w-10 text-primary mb-4" />
@@ -73,7 +73,7 @@ export function HomePage({
           </Card>
 
           <Card
-            className="p-6 border border-border hover:border-primary cursor-pointer transition-all hover:shadow-lg"
+            className="p-6 border border-border hover:border-primary cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1"
             onClick={onNavigateToChat}
           >
             <MessageSquare className="h-10 w-10 text-primary mb-4" />
@@ -82,7 +82,7 @@ export function HomePage({
           </Card>
 
           <Card
-            className="p-6 border border-border hover:border-primary cursor-pointer transition-all hover:shadow-lg"
+            className="p-6 border border-border hover:border-primary cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1"
             onClick={onNavigateToDocuments}
           >
             <FileText className="h-10 w-10 text-primary mb-4" />

@@ -35,7 +35,7 @@ export function TechnicalStatsChart() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {/* Activity Chart */}
-      <Card className="p-6">
+      <Card className="p-6 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
         <div className="mb-6">
           <h3 className="text-lg font-semibold text-foreground">Actividad Semanal</h3>
           <p className="text-sm text-muted-foreground mt-1">Cambios, errores y mejoras por día</p>
@@ -43,25 +43,26 @@ export function TechnicalStatsChart() {
         <ResponsiveContainer width="100%" height={280}>
           <BarChart data={activityData}>
             <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
-            <XAxis dataKey="name" className="text-xs" tick={{ fill: "hsl(var(--muted-foreground))" }} />
-            <YAxis className="text-xs" tick={{ fill: "hsl(var(--muted-foreground))" }} />
+            <XAxis dataKey="name" className="text-xs" tick={{ fill: "#000000" }} />
+            <YAxis className="text-xs" tick={{ fill: "#000000" }} />
             <Tooltip
               contentStyle={{
                 backgroundColor: "hsl(var(--card))",
                 border: "1px solid hsl(var(--border))",
                 borderRadius: "8px",
+                color: "#000000",
               }}
             />
             <Legend />
-            <Bar dataKey="cambios" fill="hsl(var(--chart-1))" name="Cambios" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="errores" fill="hsl(var(--destructive))" name="Errores" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="mejoras" fill="hsl(var(--chart-3))" name="Mejoras" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="cambios" fill="#6366f1" name="Cambios" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="errores" fill="#ef4444" name="Errores" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="mejoras" fill="#10b981" name="Mejoras" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </Card>
 
       {/* Performance Chart */}
-      <Card className="p-6">
+      <Card className="p-6 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
         <div className="mb-6">
           <h3 className="text-lg font-semibold text-foreground">Rendimiento del Sistema</h3>
           <p className="text-sm text-muted-foreground mt-1">Tiempo de respuesta (ms) y uptime (%)</p>
@@ -73,14 +74,14 @@ export function TechnicalStatsChart() {
             <YAxis
               yAxisId="left"
               className="text-xs"
-              tick={{ fill: "hsl(var(--muted-foreground))" }}
+              tick={{ fill: "#000000" }}
               label={{ value: "ms", position: "insideLeft" }}
             />
             <YAxis
               yAxisId="right"
               orientation="right"
               className="text-xs"
-              tick={{ fill: "hsl(var(--muted-foreground))" }}
+              tick={{ fill: "#000000" }}
               domain={[98, 100]}
               label={{ value: "%", position: "insideRight" }}
             />

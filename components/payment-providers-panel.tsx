@@ -30,7 +30,7 @@ export function PaymentProvidersPanel() {
 
   return (
     <div className="mt-12">
-      <Card className="p-8 border border-border">
+      <Card className="p-8 border border-border hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
         <div className="flex items-start gap-4 mb-6">
           <CreditCard className="h-8 w-8 text-primary flex-shrink-0" />
           <div>
@@ -43,7 +43,7 @@ export function PaymentProvidersPanel() {
 
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           {providers.map((provider, index) => (
-            <Card key={index} className="p-6 bg-secondary/30 border border-border/50">
+            <Card key={index} className="p-6 bg-secondary/30 border border-border/50 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
               <div className="flex items-start justify-between mb-4">
                 <h4 className="font-semibold text-foreground">{provider.name}</h4>
                 <span

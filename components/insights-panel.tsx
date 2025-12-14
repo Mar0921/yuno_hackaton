@@ -43,7 +43,7 @@ const insights = [
 
 export function InsightsPanel() {
   return (
-    <Card className="p-6">
+    <Card className="p-6 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
       <div className="flex items-center gap-2 mb-6">
         <Sparkles className="h-5 w-5 text-primary" />
         <h2 className="text-xl font-bold text-foreground">Insights</h2>

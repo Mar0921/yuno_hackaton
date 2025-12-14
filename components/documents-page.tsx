@@ -133,7 +133,8 @@ export function DocumentsPage({ userRole }: DocumentsPageProps) {
   }
 
   return (
-    <div className="container mx-auto px-6 py-16 max-w-7xl">
+    <div className="min-h-screen bg-[#e2e8f1]">
+      <div className="container mx-auto px-6 py-16 max-w-7xl">
       <div className="mb-12">
         <h1 className="text-4xl font-bold text-foreground mb-4">Documentos</h1>
         <p className="text-lg text-muted-foreground">
@@ -142,7 +143,7 @@ export function DocumentsPage({ userRole }: DocumentsPageProps) {
       </div>
 
       {/* Upload Section */}
-      <Card className="p-8 mb-8 border-border/50">
+      <Card className="p-8 mb-8 border-border/50 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <Upload className="h-6 w-6 text-primary" />
@@ -169,7 +170,7 @@ export function DocumentsPage({ userRole }: DocumentsPageProps) {
       </Card>
 
       {/* Filters */}
-      <Card className="p-6 mb-8 border-border/50">
+      <Card className="p-6 mb-8 border-border/50 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
         <div className="flex items-center gap-3 mb-4">
           <Filter className="h-5 w-5 text-primary" />
           <h3 className="text-lg font-semibold text-foreground">Filtros</h3>
@@ -220,7 +221,7 @@ export function DocumentsPage({ userRole }: DocumentsPageProps) {
         </h3>
 
         {filteredDocs.map((doc) => (
-          <Card key={doc.Key} className="p-6 border-border/50 hover:border-primary/50 transition-all">
+          <Card key={doc.Key} className="p-6 border-border/50 hover:border-primary transition-all hover:-translate-y-1 hover:shadow-lg">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4 flex-1">
                 <FileText className="h-8 w-8 text-primary flex-shrink-0" />
@@ -244,12 +245,13 @@ export function DocumentsPage({ userRole }: DocumentsPageProps) {
         ))}
 
         {filteredDocs.length === 0 && (
-          <Card className="p-12 text-center border-border/50">
+          <Card className="p-12 text-center border-border/50 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
             <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
             <p className="text-muted-foreground">No se encontraron documentos con los filtros aplicados</p>
           </Card>
         )}
       </div>
+    </div>
     </div>
   )
 }

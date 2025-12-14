@@ -26,7 +26,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#e2e8f1] flex items-center justify-center px-4">
       <div className="w-full max-w-5xl">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-2 mb-6">
@@ -43,7 +43,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
         {!selectedRole ? (
           <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             <Card
-              className="p-8 border-2 border-border hover:border-primary cursor-pointer transition-all hover:shadow-lg"
+              className="p-8 border-2 border-border hover:border-primary cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1"
               onClick={() => setSelectedRole("sales")}
             >
               <div className="flex flex-col items-center text-center">
@@ -72,7 +72,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
             </Card>
 
             <Card
-              className="p-8 border-2 border-border hover:border-primary cursor-pointer transition-all hover:shadow-lg"
+              className="p-8 border-2 border-border hover:border-primary cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1"
               onClick={() => setSelectedRole("technical")}
             >
               <div className="flex flex-col items-center text-center">
@@ -101,7 +101,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
             </Card>
           </div>
         ) : (
-          <Card className="max-w-md mx-auto p-8 border border-border">
+          <Card className="max-w-md mx-auto p-8 border border-border hover:-translate-y-1 transition-all hover:shadow-lg">
             <div className="mb-6">
               <button
                 onClick={() => setSelectedRole(null)}

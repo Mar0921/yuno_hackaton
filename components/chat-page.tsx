@@ -113,13 +113,14 @@ export function ChatPage() {
   }
 
   return (
-    <div className="container mx-auto px-6 py-16 max-w-5xl">
+    <div className="min-h-screen bg-[#e2e8f1]">
+      <div className="container mx-auto px-6 py-16 max-w-5xl">
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-foreground mb-4">Chat IA</h1>
         <p className="text-lg text-muted-foreground">Consulta información sobre clientes, reuniones y documentación</p>
       </div>
 
-      <Card className="flex flex-col h-[700px] border-border/50">
+      <Card className="flex flex-col h-[700px] border-border/50 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
         <div className="flex items-center gap-3 p-6 border-b border-border bg-gradient-to-r from-primary to-primary/90 text-primary-foreground rounded-t-xl">
           <div className="h-11 w-11 rounded-full bg-primary-foreground/20 flex items-center justify-center">
             <Bot className="h-6 w-6" />
@@ -207,6 +208,7 @@ export function ChatPage() {
           </div>
         </div>
       </Card>
+    </div>
     </div>
   )
 }

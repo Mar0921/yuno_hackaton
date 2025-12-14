@@ -30,7 +30,7 @@ const summaries = [
 
 export function TechnicalSummaries() {
   return (
-    <Card className="p-6">
+    <Card className="p-6 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-xl font-bold text-foreground">Resúmenes Técnicos</h2>
@@ -46,7 +46,7 @@ export function TechnicalSummaries() {
         {summaries.map((summary) => (
           <div
             key={summary.id}
-            className="border border-border rounded-lg p-4 hover:border-primary/50 transition-colors cursor-pointer group"
+            className="border border-border rounded-lg p-4 hover:border-primary transition-colors cursor-pointer group"
           >
             <div className="flex items-start justify-between mb-3">
               <div className="flex-1">

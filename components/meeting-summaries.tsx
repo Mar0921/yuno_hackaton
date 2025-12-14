@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, Clock, ArrowRight } from "lucide-react"
+import { Calendar, Clock, ArrowRight, ChevronDown, ChevronUp } from "lucide-react"
 import { useState } from "react"
 
 const meetings = [
@@ -43,6 +43,7 @@ const meetings = [
 
 export function MeetingSummaries() {
   const [selectedPeriod, setSelectedPeriod] = useState("Todos")
+  const [expandedId, setExpandedId] = useState<number | null>(null)
 
   return (
     <div>
@@ -57,7 +58,8 @@ export function MeetingSummaries() {
         {meetings.map((meeting) => (
           <Card
             key={meeting.id}
-            className="p-8 border-border/50 hover:border-primary/30 transition-all hover:shadow-lg group cursor-pointer"
+            className="p-8 border-border/50 hover:border-primary transition-all hover:shadow-lg hover:-translate-y-1 group cursor-pointer"
+            onClick={() => setExpandedId(expandedId === meeting.id ? null : meeting.id)}
           >
             <div className="flex items-start justify-between mb-4">
               <div>
@@ -79,7 +81,11 @@ export function MeetingSummaries() {
                   </div>
                 </div>
               </div>
-              <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+              {expandedId === meeting.id ? (
+                <ChevronUp className="h-5 w-5 text-primary" />
+              ) : (
+                <ChevronDown className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-all" />
+              )}
             </div>
 
             <p className="text-base text-muted-foreground mb-4 leading-relaxed">{meeting.summary}</p>
@@ -98,6 +104,29 @@ export function MeetingSummaries() {
                 </Badge>
               )}
             </div>
+
+            {expandedId === meeting.id && (
+              <div className="mt-6 pt-6 border-t border-border/50">
+                <h4 className="font-semibold text-foreground mb-3">Detalles completos de la reunión</h4>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{meeting.summary}</p>
+                  </div>
+                  <div>
+                    <h5 className="text-sm font-medium text-foreground mb-2">Participantes</h5>
+                    <p className="text-sm text-muted-foreground">Equipo de ventas y {meeting.client}</p>
+                  </div>
+                  <div>
+                    <h5 className="text-sm font-medium text-foreground mb-2">Acciones pendientes</h5>
+                    <ul className="text-sm text-muted-foreground space-y-1">
+                      <li>• Seguimiento de propuestas enviadas</li>
+                      <li>• Preparar demo de nuevas funcionalidades</li>
+                      <li>• Coordinar reunión técnica</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
           </Card>
         ))}
       </div>

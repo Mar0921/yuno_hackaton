@@ -54,7 +54,7 @@ const opportunities = [
 
 export function HighlightsPanel() {
   return (
-    <Card className="p-6">
+    <Card className="p-6 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
       <h2 className="text-xl font-bold text-foreground mb-6">Highlights</h2>
 
       {/* Contractual Items */}
