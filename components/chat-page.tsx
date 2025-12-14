@@ -43,38 +43,60 @@ export function ChatPage() {
   }, [messages])
 
   const handleSend = async () => {
-    if (!input.trim() || isLoading) return
+    if (!input.trim() || isLoading) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
       content: input,
       timestamp: new Date(),
-    }
+    };
 
-    setMessages((prev) => [...prev, userMessage])
-    setInput("")
-    setIsLoading(true)
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setIsLoading(true);
 
-    // TODO: Integrate OpenAI API with key: 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
-    // Example implementation:
-    // const response = await fetch("/api/chat", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ message: input })
-    // })
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: [
+            ...messages.map((msg) => ({
+              role: msg.role,
+              content: msg.content,
+            })),
+            { role: "user", content: input },
+          ],
+        }),
+      });
 
-    setTimeout(() => {
+      const data = await response.json();
+
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: generateMockResponse(input),
+        content: data.response?.trim() || "No se recibió respuesta.",
         timestamp: new Date(),
-      }
-      setMessages((prev) => [...prev, aiResponse])
-      setIsLoading(false)
-    }, 1500)
-  }
+      };
+
+      setMessages((prev) => [...prev, aiResponse]);
+    } catch (error) {
+      console.error("Error al llamar la API:", error);
+      const errorResponse: Message = {
+        id: (Date.now() + 2).toString(),
+        role: "assistant",
+        content: "Lo siento, ocurrió un error al procesar tu solicitud.",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorResponse]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
 
   const handlePromptClick = (prompt: string) => {
     setInput(prompt)
@@ -112,11 +134,10 @@ export function ChatPage() {
           {messages.map((message) => (
             <div key={message.id} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
               <div
-                className={`max-w-[85%] rounded-2xl p-4 ${
-                  message.role === "user"
+                className={`max-w-[85%] rounded-2xl p-4 ${message.role === "user"
                     ? "bg-primary text-primary-foreground"
                     : "bg-muted text-foreground border border-border/50"
-                }`}
+                  }`}
               >
                 {message.role === "assistant" && (
                   <div className="flex items-center gap-2 mb-2">
