@@ -53,13 +53,13 @@ export function HomePage({
 
       <main className="container mx-auto px-6 py-16 max-w-7xl">
         <div className="text-center max-w-4xl mx-auto mb-16">
-           <h1 className="text-5xl font-bold text-foreground mb-6 leading-tight">Welcome to your workspace</h1>
-           <p className="text-xl text-muted-foreground leading-relaxed">
-             {userRole === "sales"
-               ? "Manage meetings, insights and sales opportunities with AI-powered tools"
-               : "Access technical documentation, change history and detailed analysis"}
-           </p>
-         </div>
+          <h1 className="text-5xl font-bold text-foreground mb-6 leading-tight">Welcome to your workspace</h1>
+          <p className="text-xl text-muted-foreground leading-relaxed">
+            {userRole === "sales"
+              ? "Manage meetings, insights and sales opportunities with AI-powered tools"
+              : "Access technical documentation, change history and detailed analysis"}
+          </p>
+        </div>
 
         <div className="mb-12">
           <ClientSearch userRole={userRole} />
@@ -82,8 +82,8 @@ export function HomePage({
             onClick={onNavigateToChat}
           >
             <MessageSquare className={`h-10 w-10 mb-4 ${userRole === "sales" ? "text-blue-500" : "text-purple-500"}`} />
-            <h3 className="text-lg font-semibold text-foreground mb-2">AI Chat</h3>
-            <p className="text-sm text-muted-foreground">Consult information with our intelligent assistant</p>
+            <h3 className="text-lg font-semibold text-foreground mb-2">Context Core</h3>
+            <p className="text-sm text-muted-foreground">Consult information about clients, meetings and documentation</p>
           </Card>
 
           <Card

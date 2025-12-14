@@ -62,16 +62,29 @@ ESQUEMA DE RESPUESTA Y DISPLAY (Para el MODO 3):
 }
 `;
 
-export async function generateDashboardConfig(userMessage: string, contextUrl: string = 'https://l4pubebewf.execute-api.us-east-1.amazonaws.com/file?key=documentoYuno.txt') {
+import { ZOOP_CONTEXT } from '@/app/data/context-zoop';
+
+export async function generateDashboardConfig(userMessage: string, contextUrl: string = 'https://l4pubebewf.execute-api.us-east-1.amazonaws.com/file?key=reporte_clienthub.txt') {
   try {
-    // 1. Fetch context (simulated or real)
-    let contextText = '';
-    try {
-      const response = await fetch(contextUrl);
-      contextText = await response.text();
-    } catch (e) {
-      console.error("Error fetching context, using backup", e);
-      contextText = "Contexto no disponible temporalmente. Asume datos genéricos de ventas y tecnología para Yuno.";
+    // 1. Initialize with local context as backup
+    let contextText = ZOOP_CONTEXT;
+
+    // 2. Try to fetch fresh context from the new URL
+    if (contextUrl) {
+      try {
+        const response = await fetch(contextUrl, { cache: 'no-store' }); // Ensure fresh fetch
+        if (response.ok) {
+          const text = await response.text();
+          if (text && text.length > 50) { // Simple validation
+            contextText = text;
+            console.log("Using fetching context from:", contextUrl);
+          }
+        } else {
+          console.warn("Failed to fetch context, status:", response.status);
+        }
+      } catch (e) {
+        console.error("Error fetching context, using local backup", e);
+      }
     }
 
     const userPrompt = `Activa el MODO 3. Responde a la pregunta y genera la configuración de display óptima para el dashboard.

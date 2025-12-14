@@ -24,7 +24,7 @@ export default function Home() {
           userRole={userRole}
           onNavigateToDashboard={() => setCurrentView("dashboard")}
           onNavigateToDocuments={() => setCurrentView("documents")}
-          onNavigateToChat={() => setCurrentView("chat")}
+          onNavigateToChat={() => setCurrentView("ai-dashboard")}
           onToggleRole={toggleRole}
         />
       ) : (
@@ -56,13 +56,6 @@ export default function Home() {
                 </div>
                 <div className="flex justify-end">
                   <h1 className="text-xl font-semibold text-foreground mr-4">ClientHub</h1>
-                  <button
-                    onClick={() => setCurrentView("ai-dashboard")}
-                    className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2"
-                  >
-                    <span className="hidden md:inline">✨ Context Core</span>
-                    <span className="md:hidden">✨</span>
-                  </button>
                 </div>
               </div>
             </div>
@@ -75,7 +68,7 @@ export default function Home() {
             {currentView === "chat" && <ChatPage />}
           </main>
 
-          <AIChatbot />
+
         </div>
       )}
     </>

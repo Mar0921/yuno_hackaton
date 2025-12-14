@@ -53,6 +53,48 @@ export function DynamicDashboardAndChat() {
         scrollToDashboardBottom()
     }, [dashboardHistory])
 
+    // Auto-initialize dashboard with Zoop Context
+    useEffect(() => {
+        const initDashboard = async () => {
+            // Avoid double init if already populated (optional check)
+            if (dashboardHistory.length > 0) return;
+
+            const initialPrompt = "Genera el Dashboard General del Merchant Overview de Zoop. Incluye los KPIs principales, los gráficos de ingresos y ventas por categoría, y los resúmenes de reuniones con sus tags y detalles.";
+
+            // We manually inject the user message 'state' but don't strictly need to show it in the chat history 
+            // if we want it to feel 'native', but showing it puts context provided by user.
+            // Let's show it as a system welcome or similar.
+
+            setIsLoading(true);
+            try {
+                const response = await generateDashboardConfig(initialPrompt);
+                if (response.display_config) {
+                    const newEntry: DashboardEntry = {
+                        id: 'init-0', // special ID
+                        query: "Dashboard General: Zoop", // Display text for the history item
+                        timestamp: new Date(),
+                        config: response.display_config,
+                        businessAnswer: response.business_answer
+                    }
+                    setDashboardHistory([newEntry]);
+                    setMessages(prev => [...prev, {
+                        id: 'init-response',
+                        role: 'assistant',
+                        content: response.chat_message || "He cargado el estado actual de Zoop basado en la información disponible."
+                    }]);
+                }
+            } catch (e) {
+                console.error("Auto-init failed", e);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        // Small delay to ensure mount
+        const timer = setTimeout(initDashboard, 500);
+        return () => clearTimeout(timer);
+    }, []);
+
     const handleSend = async () => {
         if (!input.trim() || isLoading) return
 
@@ -114,30 +156,28 @@ export function DynamicDashboardAndChat() {
                             </h2>
                             <span className="text-xs text-muted-foreground">{dashboardHistory.length} resultados</span>
                         </div>
-
-                        <ScrollArea className="flex-1 p-6">
-                            {dashboardHistory.length === 0 ? (
-                                <div className="flex flex-col items-center justify-center h-[50vh] text-muted-foreground opacity-50">
-                                    <Sparkles className="h-16 w-16 mb-4 text-primary/20" />
-                                    <p className="text-xl">Haz una pregunta para generar tu primer reporte.</p>
-                                </div>
-                            ) : (
-                                <div className="space-y-10 pb-10">
-                                    {dashboardHistory.map((entry) => (
-                                        <div key={entry.id} className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                                            <div className="flex items-center gap-2 mb-3 px-2">
-                                                <div className="h-6 w-6 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xs font-bold">
-                                                    U
+                        <div className="h-full p-6 bg-secondary/20 overflow-y-auto">
+                            {/* Render ONLY the last entry if exists, otherwise show empty state or loading */}
+                            {dashboardHistory.length > 0 ? (
+                                (() => {
+                                    const entry = dashboardHistory[dashboardHistory.length - 1];
+                                    return (
+                                        <div className="max-w-5xl mx-auto space-y-6">
+                                            <div className="flex items-center gap-4 mb-6">
+                                                <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-primary to-purple-600 flex items-center justify-center text-white font-bold shadow-lg">
+                                                    AI
                                                 </div>
-                                                <p className="text-sm font-medium text-muted-foreground">"{entry.query}"</p>
-                                                <span className="text-xs text-muted-foreground ml-auto">
-                                                    {entry.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                                </span>
+                                                <div>
+                                                    <h3 className="text-lg font-semibold text-foreground">
+                                                        {entry.query}
+                                                    </h3>
+                                                    <span className="text-xs text-muted-foreground">
+                                                        {entry.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                    </span>
+                                                </div>
                                             </div>
 
-                                            <Card className="p-6 border-border/60 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
-                                                <div className="absolute top-0 left-0 w-1 h-full bg-primary/50 group-hover:bg-primary transition-colors" />
-
+                                            <Card className="p-6 border-border/60 shadow-sm transition-shadow relative overflow-hidden">
                                                 {entry.businessAnswer && (
                                                     <div className="mb-6 p-4 bg-muted/40 rounded-lg border border-border/50">
                                                         <h4 className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
@@ -165,11 +205,15 @@ export function DynamicDashboardAndChat() {
                                                 <ChartRenderer config={entry.config} />
                                             </Card>
                                         </div>
-                                    ))}
-                                    <div ref={dashboardEndRef} />
+                                    );
+                                })()
+                            ) : (
+                                <div className="h-full flex flex-col items-center justify-center text-muted-foreground">
+                                    <Sparkles className="h-12 w-12 mb-4 opacity-20" />
+                                    <p>Iniciando AI Assistant...</p>
                                 </div>
                             )}
-                        </ScrollArea>
+                        </div>
                     </div>
                 </ResizablePanel>
 

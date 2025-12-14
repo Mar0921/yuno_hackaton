@@ -158,7 +158,7 @@ export function ChartRenderer({ config }: ChartRendererProps) {
                                     </>
                                 )}
                                 <Tooltip
-                                    cursor={{ fill: 'rgba(128, 128, 128, 0.1)' }}
+                                    cursor={{ fill: 'rgba(255, 255, 255, 0.2)' }}
                                     contentStyle={{
                                         backgroundColor: 'hsl(var(--popover))',
                                         borderColor: 'hsl(var(--border))',
@@ -256,10 +256,22 @@ export function ChartRenderer({ config }: ChartRendererProps) {
                                             </div>
                                         )}
                                     </div>
+
+                                    {/* Tags support for Meeting Summaries style */}
+                                    {item.tags && Array.isArray(item.tags) && (
+                                        <div className="mt-3 pt-2 border-t border-border/30 flex flex-wrap gap-2">
+                                            {item.tags.map((tag: string, idx: number) => (
+                                                <span key={`tag-${idx}`} className="px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground text-xs font-medium">
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
+
                                     {!item.details && !Array.isArray(item.details) && Object.keys(item).length > 2 && (
                                         <div className="mt-3 text-xs text-muted-foreground border-t border-border/30 pt-2 break-all">
                                             {Object.entries(item)
-                                                .filter(([k]) => k !== titleKey && k !== valueKey && k !== unitKey)
+                                                .filter(([k]) => k !== titleKey && k !== valueKey && k !== unitKey && k !== 'tags')
                                                 .map(([k, v]) => <div key={k} className="mb-1"><span className="font-semibold">{k}:</span> {v as any}</div>)
                                             }
                                         </div>
