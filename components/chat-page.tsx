@@ -14,10 +14,10 @@ interface Message {
 }
 
 const suggestedPrompts = [
-  "¿Cuáles son las últimas actualizaciones del cliente Acme?",
-  "Resumen de oportunidades de venta este mes",
-  "Muéstrame los cambios técnicos recientes",
-  "¿Qué obligaciones contractuales están pendientes?",
+  "What are the latest updates from the Acme client?",
+  "Summary of sales opportunities this month",
+  "Show me recent technical changes",
+  "What contractual obligations are pending?",
 ]
 
 export function ChatPage() {
@@ -26,7 +26,7 @@ export function ChatPage() {
       id: "1",
       role: "assistant",
       content:
-        "Hola, soy tu asistente de IA. Puedo ayudarte a encontrar información sobre clientes, reuniones, documentación técnica y mucho más. ¿En qué puedo ayudarte hoy?",
+        "Hello, I am your AI assistant. I can help you find information about clients, meetings, technical documentation and much more. How can I help you today?",
       timestamp: new Date(),
     },
   ])
@@ -78,17 +78,17 @@ export function ChatPage() {
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: data.response?.trim() || "No se recibió respuesta.",
+        content: data.response?.trim() || "No response received.",
         timestamp: new Date(),
       };
 
       setMessages((prev) => [...prev, aiResponse]);
     } catch (error) {
-      console.error("Error al llamar la API:", error);
+      console.error("Error calling the API:", error);
       const errorResponse: Message = {
         id: (Date.now() + 2).toString(),
         role: "assistant",
-        content: "Lo siento, ocurrió un error al procesar tu solicitud.",
+        content: "Sorry, an error occurred while processing your request.",
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, errorResponse]);
@@ -104,20 +104,20 @@ export function ChatPage() {
 
   const generateMockResponse = (query: string): string => {
     const lowerQuery = query.toLowerCase()
-    if (lowerQuery.includes("acme") || lowerQuery.includes("actualiz")) {
-      return "El cliente Acme Corporation tuvo una reunión el 15 de enero donde discutieron la expansión del sistema de inventario. Se identificaron 2 oportunidades: módulos de predicción de demanda y análisis avanzado."
-    } else if (lowerQuery.includes("oportunidad") || lowerQuery.includes("venta")) {
-      return "Este mes se han identificado 12 oportunidades de venta: 3 de alto potencial (Analytics Avanzado para Acme, Sistema de reportes para Global Logistics, y CRM personalizado) y 9 de medio potencial."
+    if (lowerQuery.includes("acme") || lowerQuery.includes("update")) {
+      return "The Acme Corporation client had a meeting on January 15th where they discussed the expansion of the inventory system. 2 opportunities were identified: demand prediction modules and advanced analytics."
+    } else if (lowerQuery.includes("opportunity") || lowerQuery.includes("sale")) {
+      return "This month 12 sales opportunities have been identified: 3 high potential (Advanced Analytics for Acme, Reporting System for Global Logistics, and Custom CRM) and 9 medium potential."
     }
-    return "He procesado tu consulta. Puedo ayudarte con información sobre reuniones, clientes, documentación técnica, oportunidades de venta y obligaciones contractuales. ¿Podrías ser más específico?"
+    return "I have processed your query. I can help you with information about meetings, clients, technical documentation, sales opportunities and contractual obligations. Could you be more specific?"
   }
 
   return (
     <div className="min-h-screen bg-[#e2e8f1]">
       <div className="container mx-auto px-6 py-16 max-w-5xl">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-foreground mb-4">Chat IA</h1>
-        <p className="text-lg text-muted-foreground">Consulta información sobre clientes, reuniones y documentación</p>
+        <h1 className="text-4xl font-bold text-foreground mb-4">AI Chat</h1>
+        <p className="text-lg text-muted-foreground">Consult information about clients, meetings and documentation</p>
       </div>
 
       <Card className="flex flex-col h-[700px] border-border/50 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
@@ -126,8 +126,8 @@ export function ChatPage() {
             <Bot className="h-6 w-6" />
           </div>
           <div>
-            <h3 className="font-semibold text-lg">Asistente IA</h3>
-            <p className="text-xs opacity-90">Siempre disponible para ayudarte</p>
+            <h3 className="font-semibold text-lg">AI Assistant</h3>
+            <p className="text-xs opacity-90">Always available to help you</p>
           </div>
         </div>
 
@@ -150,7 +150,7 @@ export function ChatPage() {
                 <p
                   className={`text-xs mt-2 ${message.role === "user" ? "text-primary-foreground/70" : "text-muted-foreground"}`}
                 >
-                  {message.timestamp.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })}
+                  {message.timestamp.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })}
                 </p>
               </div>
             </div>
@@ -161,7 +161,7 @@ export function ChatPage() {
               <div className="max-w-[85%] rounded-2xl p-4 bg-muted border border-border/50">
                 <div className="flex items-center gap-2">
                   <Loader2 className="h-4 w-4 animate-spin text-primary" />
-                  <span className="text-sm text-muted-foreground">Pensando...</span>
+                  <span className="text-sm text-muted-foreground">Thinking...</span>
                 </div>
               </div>
             </div>
@@ -172,7 +172,7 @@ export function ChatPage() {
 
         {messages.length === 1 && (
           <div className="px-6 pb-3">
-            <p className="text-xs text-muted-foreground mb-3 font-medium">Sugerencias rápidas:</p>
+            <p className="text-xs text-muted-foreground mb-3 font-medium">Quick suggestions:</p>
             <div className="grid grid-cols-2 gap-2">
               {suggestedPrompts.map((prompt, idx) => (
                 <button
@@ -193,7 +193,7 @@ export function ChatPage() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
-              placeholder="Escribe tu pregunta..."
+              placeholder="Type your question..."
               className="flex-1 h-12 rounded-xl"
               disabled={isLoading}
             />

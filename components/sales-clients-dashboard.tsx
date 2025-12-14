@@ -34,7 +34,7 @@ export function SalesClientsDashboard({ onBack }: SalesClientsDashboardProps) {
       <div className="mb-6">
         <Button onClick={onBack} variant="outline" className="mb-4">
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Volver al Dashboard de Ventas
+          Back to Sales Dashboard
         </Button>
       </div>
       <div className="text-center max-w-4xl mx-auto mb-20">
@@ -43,10 +43,10 @@ export function SalesClientsDashboard({ onBack }: SalesClientsDashboardProps) {
           <span className="text-sm font-medium text-foreground">Dashboard de Clientes</span>
         </div>
         <h1 className="text-5xl font-bold text-foreground mb-6 leading-tight text-balance">
-          Estadísticas detalladas del cliente seleccionado
+          Detailed statistics of the selected client
         </h1>
         <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-          Visualiza el rendimiento, reuniones y oportunidades específicas de este cliente.
+          Visualize the performance, meetings and specific opportunities of this client.
         </p>
       </div>
 
@@ -54,27 +54,27 @@ export function SalesClientsDashboard({ onBack }: SalesClientsDashboardProps) {
         <ClientSearch userRole="sales" />
 
         <Card className="p-6 border-border/50 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
-          <h3 className="text-lg font-semibold text-foreground mb-6">Hitos Importantes del Cliente</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-6">Important Client Milestones</h3>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="space-y-6">
               <div>
                 <h4 className="font-medium text-foreground mb-2">Merchant: Zoop</h4>
               </div>
               <div>
-                <h5 className="font-medium text-foreground mb-3">Momentos clave:</h5>
+                <h5 className="font-medium text-foreground mb-3">Key moments:</h5>
                 <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                  <li>Primera llamada comercial</li>
-                  <li>Firma de contrato (con promesas comerciales)</li>
-                  <li>Inicio de implementación e integraciones</li>
-                  <li>Salida a producción (Go-Live)</li>
+                  <li>First commercial call</li>
+                  <li>Contract signing (with commercial promises)</li>
+                  <li>Start of implementation and integrations</li>
+                  <li>Go-Live to production</li>
                 </ul>
               </div>
               <div>
-                <h5 className="font-medium text-foreground mb-3">Requerimientos iniciales:</h5>
+                <h5 className="font-medium text-foreground mb-3">Initial requirements:</h5>
                 <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                  <li>Tarjetas y PSE</li>
-                  <li>Operación en Colombia y México</li>
-                  <li>Límites de riesgo por país</li>
+                  <li>Cards and PSE</li>
+                  <li>Operation in Colombia and Mexico</li>
+                  <li>Risk limits by country</li>
                 </ul>
               </div>
             </div>
@@ -86,12 +86,12 @@ export function SalesClientsDashboard({ onBack }: SalesClientsDashboardProps) {
                 className="w-full h-64 border rounded-lg"
               ></iframe>
               <div>
-                <h5 className="font-medium text-foreground mb-3">Cosas a tener en cuenta para la reunión:</h5>
+                <h5 className="font-medium text-foreground mb-3">Things to consider for the meeting:</h5>
                 <ul className="list-disc list-inside space-y-1 text-muted-foreground text-sm">
-                  <li>Revisar el progreso de implementación</li>
-                  <li>Discutir posibles expansiones a nuevos mercados</li>
-                  <li>Evaluar satisfacción del cliente</li>
-                  <li>Planificar próximos hitos</li>
+                  <li>Review implementation progress</li>
+                  <li>Discuss possible expansions to new markets</li>
+                  <li>Evaluate client satisfaction</li>
+                  <li>Plan next milestones</li>
                 </ul>
               </div>
             </div>
@@ -129,7 +129,7 @@ export function SalesClientsDashboard({ onBack }: SalesClientsDashboardProps) {
               <TrendingUp className="h-4 w-4 text-green-500" />
             </div>
             <div className="text-3xl font-bold text-foreground mb-1">$45K</div>
-            <p className="text-sm text-muted-foreground">Revenue total</p>
+            <p className="text-sm text-muted-foreground">Total revenue</p>
           </Card>
 
           <Card className="p-6 border-border/50 hover:border-primary transition-all hover:shadow-lg hover:-translate-y-1">
@@ -139,7 +139,7 @@ export function SalesClientsDashboard({ onBack }: SalesClientsDashboardProps) {
               </div>
             </div>
             <div className="text-3xl font-bold text-foreground mb-1">92%</div>
-            <p className="text-sm text-muted-foreground">Satisfacción</p>
+            <p className="text-sm text-muted-foreground">Satisfaction</p>
           </Card>
         </div>
 

@@ -133,10 +133,9 @@ export function FileUploadSection() {
       <div className="flex items-start gap-4 mb-6">
         <Upload className="h-8 w-8 text-primary flex-shrink-0" />
         <div>
-          <h3 className="text-xl font-semibold text-foreground mb-2">Subir archivos</h3>
+          <h3 className="text-xl font-semibold text-foreground mb-2">Upload files</h3>
           <p className="text-muted-foreground">
-            Sube documentos de Excel, Drive o cualquier archivo relevante del cliente. Los archivos se procesarán
-            automáticamente con IA.
+            Upload Excel documents, Drive or any relevant client file. Files will be automatically processed with AI.
           </p>
         </div>
       </div>
@@ -146,9 +145,9 @@ export function FileUploadSection() {
         onClick={() => fileInputRef.current?.click()}
       >
         <Upload className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-        <p className="text-foreground font-medium mb-1">Haz clic para subir o arrastra archivos aquí</p>
+        <p className="text-foreground font-medium mb-1">Click to upload or drag files here</p>
         <p className="text-sm text-muted-foreground">
-          Soporta Excel, PDF, Word, imágenes y más (Máximo 10MB por archivo)
+          Supports Excel, PDF, Word, images and more (Maximum 10MB per file)
         </p>
         <input
           ref={fileInputRef}
@@ -164,20 +163,20 @@ export function FileUploadSection() {
       {isUploading && (
         <div className="mt-6 flex items-center justify-center gap-2 text-primary">
           <Loader2 className="h-5 w-5 animate-spin" />
-          <span className="text-sm font-medium">Subiendo archivos...</span>
+          <span className="text-sm font-medium">Uploading files...</span>
         </div>
       )}
 
       {isLoadingFiles && (
         <div className="mt-6 flex items-center justify-center gap-2 text-muted-foreground">
           <Loader2 className="h-5 w-5 animate-spin" />
-          <span className="text-sm">Cargando archivos...</span>
+          <span className="text-sm">Loading files...</span>
         </div>
       )}
 
       {uploadedFiles.length > 0 && (
         <div className="mt-6">
-          <h4 className="text-sm font-medium text-foreground mb-3">Archivos subidos ({uploadedFiles.length})</h4>
+          <h4 className="text-sm font-medium text-foreground mb-3">Uploaded files ({uploadedFiles.length})</h4>
           <div className="space-y-2">
             {uploadedFiles.map((file, index) => (
               <div key={index} className="flex items-center justify-between p-3 bg-secondary rounded-lg">

@@ -117,7 +117,7 @@ export function DocumentsPage({ userRole }: DocumentsPageProps) {
   }
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("es-ES", {
+    return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
       month: "short",
       day: "numeric",
@@ -133,12 +133,12 @@ export function DocumentsPage({ userRole }: DocumentsPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-[#e2e8f1]">
+    <div className={`min-h-screen ${userRole === "sales" ? "bg-[#e2e8f1]" : "bg-[#e8e2f1]"} transition-colors duration-500`}>
       <div className="container mx-auto px-6 py-16 max-w-7xl">
       <div className="mb-12">
-        <h1 className="text-4xl font-bold text-foreground mb-4">Documentos</h1>
+        <h1 className="text-4xl font-bold text-foreground mb-4">Documents</h1>
         <p className="text-lg text-muted-foreground">
-          Gestiona y accede a toda la documentación de clientes y transcripciones
+          Manage and access all client documentation and transcriptions
         </p>
       </div>
 
@@ -147,11 +147,11 @@ export function DocumentsPage({ userRole }: DocumentsPageProps) {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <Upload className="h-6 w-6 text-primary" />
-            <h3 className="text-xl font-semibold text-foreground">Subir Documento</h3>
+            <h3 className="text-xl font-semibold text-foreground">Upload Document</h3>
           </div>
           <Button variant="outline" size="sm" className="gap-2 bg-transparent">
             <Mic className="h-4 w-4" />
-            Ver Transcripciones
+            View Transcriptions
           </Button>
         </div>
         <div className="flex gap-4">
@@ -162,10 +162,10 @@ export function DocumentsPage({ userRole }: DocumentsPageProps) {
             className="flex-1"
             accept=".pdf,.doc,.docx,.xls,.xlsx,.txt,.csv"
           />
-          <Button disabled={uploading}>{uploading ? "Subiendo..." : "Subir Archivo"}</Button>
+          <Button disabled={uploading}>{uploading ? "Uploading..." : "Upload File"}</Button>
         </div>
         <p className="text-sm text-muted-foreground mt-3">
-          Formatos soportados: PDF, Word, Excel, CSV, TXT. Las grabaciones se transcribirán automáticamente.
+          Supported formats: PDF, Word, Excel, CSV, TXT. Recordings will be transcribed automatically.
         </p>
       </Card>
 
@@ -173,13 +173,13 @@ export function DocumentsPage({ userRole }: DocumentsPageProps) {
       <Card className="p-6 mb-8 border-border/50 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
         <div className="flex items-center gap-3 mb-4">
           <Filter className="h-5 w-5 text-primary" />
-          <h3 className="text-lg font-semibold text-foreground">Filtros</h3>
+          <h3 className="text-lg font-semibold text-foreground">Filters</h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Buscar documentos..."
+              placeholder="Search documents..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -188,10 +188,10 @@ export function DocumentsPage({ userRole }: DocumentsPageProps) {
 
           <Select value={selectedClient} onValueChange={setSelectedClient}>
             <SelectTrigger>
-              <SelectValue placeholder="Todos los clientes" />
+              <SelectValue placeholder="All clients" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Todos los clientes</SelectItem>
+              <SelectItem value="all">All clients</SelectItem>
               <SelectItem value="acme">Acme Corporation</SelectItem>
               <SelectItem value="techstart">TechStart SL</SelectItem>
               <SelectItem value="global">Global Logistics</SelectItem>
@@ -200,14 +200,14 @@ export function DocumentsPage({ userRole }: DocumentsPageProps) {
 
           <Select value={selectedType} onValueChange={setSelectedType}>
             <SelectTrigger>
-              <SelectValue placeholder="Tipo de archivo" />
+              <SelectValue placeholder="File type" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Todos los tipos</SelectItem>
+              <SelectItem value="all">All types</SelectItem>
               <SelectItem value="pdf">PDF</SelectItem>
               <SelectItem value="xlsx">Excel</SelectItem>
               <SelectItem value="docx">Word</SelectItem>
-              <SelectItem value="txt">Texto</SelectItem>
+              <SelectItem value="txt">Text</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -216,8 +216,7 @@ export function DocumentsPage({ userRole }: DocumentsPageProps) {
       {/* Documents List */}
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-foreground mb-4">
-          {filteredDocs.length} documento{filteredDocs.length !== 1 ? "s" : ""} encontrado
-          {filteredDocs.length !== 1 ? "s" : ""}
+          {filteredDocs.length} document{filteredDocs.length !== 1 ? "s" : ""} found
         </h3>
 
         {filteredDocs.map((doc) => (
@@ -238,7 +237,7 @@ export function DocumentsPage({ userRole }: DocumentsPageProps) {
               </div>
               <Button onClick={() => handleDownload(doc.Key)} variant="outline" size="sm" className="gap-2">
                 <Download className="h-4 w-4" />
-                Descargar
+                Download
               </Button>
             </div>
           </Card>
@@ -247,7 +246,7 @@ export function DocumentsPage({ userRole }: DocumentsPageProps) {
         {filteredDocs.length === 0 && (
           <Card className="p-12 text-center border-border/50 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
             <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <p className="text-muted-foreground">No se encontraron documentos con los filtros aplicados</p>
+            <p className="text-muted-foreground">No documents found with the applied filters</p>
           </Card>
         )}
       </div>

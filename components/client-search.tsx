@@ -15,8 +15,8 @@ export function ClientSearch({ userRole }: ClientSearchProps) {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([])
   const [showFilters, setShowFilters] = useState(false)
 
-  const salesFilters = ["Reunión reciente", "Oportunidad activa", "Contrato vigente", "Prioridad alta"]
-  const technicalFilters = ["Error activo", "Cambio reciente", "Mejora", "Documentación pendiente"]
+  const salesFilters = ["Recent meeting", "Active opportunity", "Active contract", "High priority"]
+  const technicalFilters = ["Active error", "Recent change", "Improvement", "Pending documentation"]
 
   const availableFilters = userRole === "sales" ? salesFilters : technicalFilters
 
@@ -36,7 +36,7 @@ export function ClientSearch({ userRole }: ClientSearchProps) {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
               type="text"
-              placeholder="Buscar cliente por nombre, empresa o ID..."
+              placeholder="Search client by name, company or ID..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -44,7 +44,7 @@ export function ClientSearch({ userRole }: ClientSearchProps) {
           </div>
           <Button variant="outline" onClick={() => setShowFilters(!showFilters)}>
             <Filter className="h-4 w-4 mr-2" />
-            Filtros
+            Filters
             {selectedFilters.length > 0 && (
               <span className="ml-2 bg-primary text-primary-foreground rounded-full px-2 py-0.5 text-xs">
                 {selectedFilters.length}
@@ -56,10 +56,10 @@ export function ClientSearch({ userRole }: ClientSearchProps) {
         {showFilters && (
           <div className="border-t border-border pt-4">
             <div className="flex items-center justify-between mb-3">
-              <h4 className="text-sm font-medium text-foreground">Filtros disponibles</h4>
+              <h4 className="text-sm font-medium text-foreground">Available filters</h4>
               {selectedFilters.length > 0 && (
                 <button onClick={clearFilters} className="text-xs text-muted-foreground hover:text-foreground">
-                  Limpiar filtros
+                  Clear filters
                 </button>
               )}
             </div>
@@ -84,7 +84,7 @@ export function ClientSearch({ userRole }: ClientSearchProps) {
 
         {selectedFilters.length > 0 && (
           <div className="border-t border-border pt-4">
-            <p className="text-sm text-muted-foreground mb-3">Filtros activos:</p>
+            <p className="text-sm text-muted-foreground mb-3">Active filters:</p>
             <div className="flex flex-wrap gap-2">
               {selectedFilters.map((filter) => (
                 <span key={filter} className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-lg">

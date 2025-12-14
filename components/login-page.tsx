@@ -36,8 +36,8 @@ export function LoginPage({ onLogin }: LoginPageProps) {
               </svg>
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-foreground mb-3">Bienvenido a ClientHub</h1>
-          <p className="text-lg text-muted-foreground">Gestión inteligente de clientes y documentación técnica</p>
+          <h1 className="text-4xl font-bold text-foreground mb-3">Welcome to ClientHub</h1>
+          <p className="text-lg text-muted-foreground">Intelligent management of clients and technical documentation</p>
         </div>
 
         {!selectedRole ? (
@@ -50,9 +50,9 @@ export function LoginPage({ onLogin }: LoginPageProps) {
                 <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
                   <Users className="h-8 w-8 text-primary" />
                 </div>
-                <h2 className="text-2xl font-bold text-foreground mb-3">Ventas</h2>
+                <h2 className="text-2xl font-bold text-foreground mb-3">Sales</h2>
                 <p className="text-muted-foreground mb-6">
-                  Accede a resúmenes de reuniones, insights y oportunidades de venta
+                  Access meeting summaries, insights and sales opportunities
                 </p>
                 <ul className="text-sm text-muted-foreground space-y-2 text-left w-full">
                   <li className="flex items-start gap-2">
@@ -79,9 +79,9 @@ export function LoginPage({ onLogin }: LoginPageProps) {
                 <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
                   <Wrench className="h-8 w-8 text-primary" />
                 </div>
-                <h2 className="text-2xl font-bold text-foreground mb-3">Técnico</h2>
+                <h2 className="text-2xl font-bold text-foreground mb-3">Technical</h2>
                 <p className="text-muted-foreground mb-6">
-                  Documentación técnica, cambios previos y análisis detallado
+                  Technical documentation, previous changes and detailed analysis
                 </p>
                 <ul className="text-sm text-muted-foreground space-y-2 text-left w-full">
                   <li className="flex items-start gap-2">
@@ -107,17 +107,17 @@ export function LoginPage({ onLogin }: LoginPageProps) {
                 onClick={() => setSelectedRole(null)}
                 className="text-sm text-muted-foreground hover:text-foreground mb-4"
               >
-                ← Volver a selección de perfil
+                ← Back to profile selection
               </button>
               <h2 className="text-2xl font-bold text-foreground mb-2">
-                Iniciar sesión como {selectedRole === "sales" ? "Ventas" : "Técnico"}
+                Log in as {selectedRole === "sales" ? "Sales" : "Technical"}
               </h2>
-              <p className="text-muted-foreground">Ingresa tus credenciales para continuar</p>
+              <p className="text-muted-foreground">Enter your credentials to continue</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="space-y-2">
-                <Label htmlFor="email">Correo electrónico</Label>
+                <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
                   type="email"
@@ -129,7 +129,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password">Contraseña</Label>
+                <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
                   type="password"
@@ -141,12 +141,12 @@ export function LoginPage({ onLogin }: LoginPageProps) {
               </div>
 
               <Button type="submit" className="w-full">
-                Iniciar sesión
+                Log in
               </Button>
             </form>
 
             <p className="text-xs text-center text-muted-foreground mt-6">
-              ¿Olvidaste tu contraseña? <button className="text-primary hover:underline">Recuperar acceso</button>
+              Forgot your password? <button className="text-primary hover:underline">Recover access</button>
             </p>
           </Card>
         )}

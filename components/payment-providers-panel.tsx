@@ -6,26 +6,26 @@ import { CreditCard, Globe, AlertCircle, CheckCircle, DollarSign } from "lucide-
 export function PaymentProvidersPanel() {
   const providers = [
     {
-      name: "Tarjetas de Crédito/Débito",
+      name: "Credit/Debit Cards",
       status: "active",
-      countries: ["Colombia", "México"],
-      volume: "Alto",
-      agreements: "Comisión estándar 2.9% + $0.30 USD",
+      countries: ["Colombia", "Mexico"],
+      volume: "High",
+      agreements: "Standard commission 2.9% + $0.30 USD",
     },
     {
       name: "PSE",
       status: "active",
       countries: ["Colombia"],
-      volume: "Medio",
-      agreements: "Comisión 1.5%",
+      volume: "Medium",
+      agreements: "Commission 1.5%",
     },
   ]
 
   const requirements = [
-    { label: "Tarjetas y PSE", status: "completed" },
-    { label: "Operación en Colombia", status: "completed" },
-    { label: "Operación en México", status: "completed" },
-    { label: "Límites de riesgo configurados", status: "active" },
+    { label: "Cards and PSE", status: "completed" },
+    { label: "Operation in Colombia", status: "completed" },
+    { label: "Operation in Mexico", status: "completed" },
+    { label: "Risk limits configured", status: "active" },
   ]
 
   return (
@@ -34,9 +34,9 @@ export function PaymentProvidersPanel() {
         <div className="flex items-start gap-4 mb-6">
           <CreditCard className="h-8 w-8 text-primary flex-shrink-0" />
           <div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Providers y Métodos de Pago</h3>
+            <h3 className="text-xl font-semibold text-foreground mb-2">Providers and Payment Methods</h3>
             <p className="text-muted-foreground">
-              Información sobre proveedores de pago, volúmenes esperados, acuerdos comerciales y restricciones
+              Information about payment providers, expected volumes, commercial agreements and restrictions
             </p>
           </div>
         </div>
@@ -78,7 +78,7 @@ export function PaymentProvidersPanel() {
         </div>
 
         <div className="border-t border-border pt-6">
-          <h4 className="text-sm font-semibold text-foreground mb-4">Requerimientos iniciales</h4>
+          <h4 className="text-sm font-semibold text-foreground mb-4">Initial requirements</h4>
           <div className="grid md:grid-cols-2 gap-3">
             {requirements.map((req, index) => (
               <div key={index} className="flex items-center gap-3 p-3 bg-secondary/30 rounded-lg">
@@ -96,8 +96,8 @@ export function PaymentProvidersPanel() {
             <div className="flex items-start gap-2">
               <AlertCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm font-medium text-foreground mb-1">Límites de riesgo por país</p>
-                <p className="text-xs text-muted-foreground">Colombia: $50,000 USD/día | México: $75,000 USD/día</p>
+                <p className="text-sm font-medium text-foreground mb-1">Risk limits by country</p>
+                <p className="text-xs text-muted-foreground">Colombia: $50,000 USD/day | Mexico: $75,000 USD/day</p>
               </div>
             </div>
           </div>

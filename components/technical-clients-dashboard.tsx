@@ -33,7 +33,7 @@ export function TechnicalClientsDashboard({ onBack }: TechnicalClientsDashboardP
       <div className="mb-6">
         <Button onClick={onBack} variant="outline" className="mb-4">
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Volver al Dashboard Técnico
+          Back to Technical Dashboard
         </Button>
       </div>
       <div className="text-center max-w-4xl mx-auto mb-20">
@@ -42,10 +42,10 @@ export function TechnicalClientsDashboard({ onBack }: TechnicalClientsDashboardP
           <span className="text-sm font-medium text-foreground">Dashboard de Clientes Técnicos</span>
         </div>
         <h1 className="text-5xl font-bold text-foreground mb-6 leading-tight text-balance">
-          Estadísticas detalladas del cliente técnico seleccionado
+          Detailed statistics of the selected technical client
         </h1>
         <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-          Visualiza el rendimiento técnico, errores y cambios específicos de este cliente.
+          Visualize the technical performance, errors and specific changes of this client.
         </p>
       </div>
 
@@ -53,27 +53,27 @@ export function TechnicalClientsDashboard({ onBack }: TechnicalClientsDashboardP
         <ClientSearch userRole="technical" />
 
         <Card className="p-6 border-border/50 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
-          <h3 className="text-lg font-semibold text-foreground mb-6">Hitos Importantes del Cliente Técnico</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-6">Important Technical Client Milestones</h3>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="space-y-6">
               <div>
                 <h4 className="font-medium text-foreground mb-2">Merchant: TechCorp</h4>
               </div>
               <div>
-                <h5 className="font-medium text-foreground mb-3">Momentos clave:</h5>
+                <h5 className="font-medium text-foreground mb-3">Key moments:</h5>
                 <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                  <li>Primera implementación técnica</li>
-                  <li>Resolución de errores críticos</li>
-                  <li>Migración a nueva infraestructura</li>
-                  <li>Optimización de rendimiento</li>
+                  <li>First technical implementation</li>
+                  <li>Resolution of critical errors</li>
+                  <li>Migration to new infrastructure</li>
+                  <li>Performance optimization</li>
                 </ul>
               </div>
               <div>
-                <h5 className="font-medium text-foreground mb-3">Requerimientos técnicos iniciales:</h5>
+                <h5 className="font-medium text-foreground mb-3">Initial technical requirements:</h5>
                 <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                  <li>Integración con APIs externas</li>
-                  <li>Base de datos PostgreSQL</li>
-                  <li>Monitoreo y logging</li>
+                  <li>Integration with external APIs</li>
+                  <li>PostgreSQL database</li>
+                  <li>Monitoring and logging</li>
                 </ul>
               </div>
             </div>
@@ -85,12 +85,12 @@ export function TechnicalClientsDashboard({ onBack }: TechnicalClientsDashboardP
                 className="w-full h-64 border rounded-lg"
               ></iframe>
               <div>
-                <h5 className="font-medium text-foreground mb-3">Cosas a tener en cuenta para la reunión técnica:</h5>
+                <h5 className="font-medium text-foreground mb-3">Things to consider for the technical meeting:</h5>
                 <ul className="list-disc list-inside space-y-1 text-muted-foreground text-sm">
-                  <li>Revisar logs de errores recientes</li>
-                  <li>Discutir mejoras de seguridad</li>
-                  <li>Evaluar rendimiento del sistema</li>
-                  <li>Planificar mantenimiento preventivo</li>
+                  <li>Review recent error logs</li>
+                  <li>Discuss security improvements</li>
+                  <li>Evaluate system performance</li>
+                  <li>Plan preventive maintenance</li>
                 </ul>
               </div>
             </div>
@@ -106,7 +106,7 @@ export function TechnicalClientsDashboard({ onBack }: TechnicalClientsDashboardP
               <TrendingUp className="h-4 w-4 text-green-500" />
             </div>
             <div className="text-3xl font-bold text-foreground mb-1">12</div>
-            <p className="text-sm text-muted-foreground">Cambios realizados</p>
+            <p className="text-sm text-muted-foreground">Changes made</p>
           </Card>
 
           <Card className="p-6 border-border/50 hover:border-primary transition-all hover:shadow-lg hover:-translate-y-1">
@@ -117,7 +117,7 @@ export function TechnicalClientsDashboard({ onBack }: TechnicalClientsDashboardP
               <TrendingUp className="h-4 w-4 text-green-500" />
             </div>
             <div className="text-3xl font-bold text-primary mb-1">2</div>
-            <p className="text-sm text-muted-foreground">Errores activos</p>
+            <p className="text-sm text-muted-foreground">Active errors</p>
           </Card>
 
           <Card className="p-6 border-border/50 hover:border-primary transition-all hover:shadow-lg hover:-translate-y-1">
@@ -128,7 +128,7 @@ export function TechnicalClientsDashboard({ onBack }: TechnicalClientsDashboardP
               <TrendingUp className="h-4 w-4 text-green-500" />
             </div>
             <div className="text-3xl font-bold text-foreground mb-1">95%</div>
-            <p className="text-sm text-muted-foreground">Uptime sistema</p>
+            <p className="text-sm text-muted-foreground">System uptime</p>
           </Card>
 
           <Card className="p-6 border-border/50 hover:border-primary transition-all hover:shadow-lg hover:-translate-y-1">
@@ -138,13 +138,13 @@ export function TechnicalClientsDashboard({ onBack }: TechnicalClientsDashboardP
               </div>
             </div>
             <div className="text-3xl font-bold text-foreground mb-1">8</div>
-            <p className="text-sm text-muted-foreground">Mejoras implementadas</p>
+            <p className="text-sm text-muted-foreground">Improvements implemented</p>
           </Card>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <Card className="p-6 border-border/50 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
-            <h3 className="text-lg font-semibold text-foreground mb-6">Errores Mensuales del Cliente</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-6">Client Monthly Errors</h3>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={clientMonthlyErrors}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -164,7 +164,7 @@ export function TechnicalClientsDashboard({ onBack }: TechnicalClientsDashboardP
           </Card>
 
           <Card className="p-6 border-border/50 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
-            <h3 className="text-lg font-semibold text-foreground mb-6">Cambios por Tipo del Cliente</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-6">Changes by Client Type</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={clientChangesByType}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />

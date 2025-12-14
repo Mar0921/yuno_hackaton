@@ -10,20 +10,20 @@ const summaries = [
     id: 1,
     client: "Acme Corporation",
     date: "2024-01-14",
-    title: "Implementación de caché Redis",
+    title: "Redis cache implementation",
     summary:
-      "Se optimizó el rendimiento del sistema implementando caché Redis. Esto mejoró los tiempos de respuesta en un 60% para consultas frecuentes.",
-    impact: "Alto",
+      "System performance was optimized by implementing Redis cache. This improved response times by 60% for frequent queries.",
+    impact: "High",
     technician: "María González",
   },
   {
     id: 2,
     client: "TechStart SL",
     date: "2024-01-13",
-    title: "Migración a nueva versión de API",
+    title: "Migration to new API version",
     summary:
-      "Se actualizó la integración con servicios externos a la versión 3.0, añadiendo compatibilidad con webhooks en tiempo real.",
-    impact: "Medio",
+      "Integration with external services was updated to version 3.0, adding compatibility with real-time webhooks.",
+    impact: "Medium",
     technician: "Carlos Ruiz",
   },
 ]
@@ -33,12 +33,12 @@ export function TechnicalSummaries() {
     <Card className="p-6 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-bold text-foreground">Resúmenes Técnicos</h2>
-          <p className="text-sm text-muted-foreground mt-1">Traducidos a lenguaje no técnico por IA</p>
+          <h2 className="text-xl font-bold text-foreground">Technical Summaries</h2>
+          <p className="text-sm text-muted-foreground mt-1">Translated to non-technical language by AI</p>
         </div>
         <Button variant="outline" size="sm" className="gap-2 bg-transparent">
           <Code className="h-4 w-4" />
-          Ver detalles técnicos
+          View technical details
         </Button>
       </div>
 
@@ -57,7 +57,7 @@ export function TechnicalSummaries() {
                   </h3>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  {summary.client} • {new Date(summary.date).toLocaleDateString("es-ES")} • {summary.technician}
+                  {summary.client} • {new Date(summary.date).toLocaleDateString("en-US")} • {summary.technician}
                 </p>
               </div>
               <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />

@@ -10,47 +10,47 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 const changes = [
   {
     id: 1,
-    title: "Implementación de caché Redis",
+    title: "Redis cache implementation",
     client: "Acme Corporation",
     technician: "María González",
     date: "2024-01-14",
-    type: "Mejora",
+    type: "Improvement",
     description:
-      "Se implementó sistema de caché Redis para optimizar consultas frecuentes. Mejora del 60% en tiempo de respuesta.",
-    previousWork: "Sistema anterior usaba caché en memoria local, limitado a instancia única.",
+      "Redis caching system implemented to optimize frequent queries. 60% improvement in response time.",
+    previousWork: "Previous system used local memory cache, limited to single instance.",
   },
   {
     id: 2,
-    title: "Corrección de error en API de pagos",
+    title: "Bug fix in payments API",
     client: "TechStart SL",
     technician: "Carlos Ruiz",
     date: "2024-01-13",
     type: "Error",
     description:
-      "Se corrigió bug que causaba timeouts en transacciones mayores a 1000€. Implementado retry logic y validación mejorada.",
-    previousWork: "API original de Juan Pérez (2023-11) no manejaba reintentos automáticos.",
+      "Fixed bug causing timeouts in transactions over 1000€. Implemented retry logic and improved validation.",
+    previousWork: "Original API by Juan Pérez (2023-11) did not handle automatic retries.",
   },
   {
     id: 3,
-    title: "Migración a PostgreSQL 15",
+    title: "Migration to PostgreSQL 15",
     client: "Global Logistics",
     technician: "Ana Martínez",
     date: "2024-01-12",
-    type: "Cambio",
+    type: "Change",
     description:
-      "Actualización de PostgreSQL 13 a 15. Aprovecha nuevas características de particionado y mejoras de performance.",
-    previousWork: "Configuración inicial por Pedro López (2022-08), actualización necesaria por EOL.",
+      "Upgrade from PostgreSQL 13 to 15. Takes advantage of new partitioning features and performance improvements.",
+    previousWork: "Initial setup by Pedro López (2022-08), update necessary due to EOL.",
   },
   {
     id: 4,
-    title: "Integración webhooks Slack",
+    title: "Slack webhooks integration",
     client: "TechStart SL",
     technician: "María González",
     date: "2024-01-11",
-    type: "Mejora",
+    type: "Improvement",
     description:
-      "Implementación de webhooks bidireccionales con Slack. Permite notificaciones en tiempo real y comandos desde chat.",
-    previousWork: "Sistema previo usaba polling cada 5 minutos, causaba latencia.",
+      "Implementation of bidirectional webhooks with Slack. Allows real-time notifications and commands from chat.",
+    previousWork: "Previous system used polling every 5 minutes, caused latency.",
   },
 ]
 
@@ -72,9 +72,9 @@ export function TechnicalChangesPanel() {
     switch (type) {
       case "Error":
         return <Bug className="h-4 w-4" />
-      case "Mejora":
+      case "Improvement":
         return <Sparkles className="h-4 w-4" />
-      case "Cambio":
+      case "Change":
         return <Wrench className="h-4 w-4" />
       default:
         return <GitCommit className="h-4 w-4" />
@@ -85,7 +85,7 @@ export function TechnicalChangesPanel() {
     switch (type) {
       case "Error":
         return "destructive"
-      case "Mejora":
+      case "Improvement":
         return "default"
       default:
         return "secondary"
@@ -96,8 +96,8 @@ export function TechnicalChangesPanel() {
     <Card className="p-6 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-bold text-foreground">Cambios Técnicos</h2>
-          <p className="text-sm text-muted-foreground mt-1">Historial con contexto de trabajo previo</p>
+          <h2 className="text-xl font-bold text-foreground">Technical Changes</h2>
+          <p className="text-sm text-muted-foreground mt-1">History with previous work context</p>
         </div>
       </div>
 
@@ -106,7 +106,7 @@ export function TechnicalChangesPanel() {
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Buscar cambios..."
+            placeholder="Search changes..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-9"
@@ -116,10 +116,10 @@ export function TechnicalChangesPanel() {
         <div className="grid grid-cols-2 gap-3">
           <Select value={selectedClient} onValueChange={setSelectedClient}>
             <SelectTrigger>
-              <SelectValue placeholder="Cliente" />
+              <SelectValue placeholder="Client" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Todos los clientes</SelectItem>
+              <SelectItem value="all">All clients</SelectItem>
               <SelectItem value="Acme Corporation">Acme Corporation</SelectItem>
               <SelectItem value="TechStart SL">TechStart SL</SelectItem>
               <SelectItem value="Global Logistics">Global Logistics</SelectItem>
@@ -128,13 +128,13 @@ export function TechnicalChangesPanel() {
 
           <Select value={selectedType} onValueChange={setSelectedType}>
             <SelectTrigger>
-              <SelectValue placeholder="Tipo" />
+              <SelectValue placeholder="Type" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Todos</SelectItem>
-              <SelectItem value="Error">Errores</SelectItem>
-              <SelectItem value="Mejora">Mejoras</SelectItem>
-              <SelectItem value="Cambio">Cambios</SelectItem>
+              <SelectItem value="all">All</SelectItem>
+              <SelectItem value="Error">Errors</SelectItem>
+              <SelectItem value="Improvement">Improvements</SelectItem>
+              <SelectItem value="Change">Changes</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -153,7 +153,7 @@ export function TechnicalChangesPanel() {
                   className={`h-10 w-10 rounded-lg flex items-center justify-center shrink-0 ${
                     change.type === "Error"
                       ? "bg-destructive/10 text-destructive"
-                      : change.type === "Mejora"
+                      : change.type === "Improvement"
                         ? "bg-primary/10 text-primary"
                         : "bg-muted text-foreground"
                   }`}
@@ -166,7 +166,7 @@ export function TechnicalChangesPanel() {
                   </h3>
                   <p className="text-xs text-muted-foreground mt-1">
                     {change.client} • {change.technician} •{" "}
-                    {new Date(change.date).toLocaleDateString("es-ES", {
+                    {new Date(change.date).toLocaleDateString("en-US", {
                       day: "numeric",
                       month: "short",
                     })}
@@ -180,7 +180,7 @@ export function TechnicalChangesPanel() {
               <p className="text-xs text-foreground leading-relaxed">{change.description}</p>
               <div className="bg-muted rounded-md p-2 border-l-2 border-muted-foreground">
                 <p className="text-xs text-muted-foreground">
-                  <span className="font-medium">Trabajo previo:</span> {change.previousWork}
+                  <span className="font-medium">Previous work:</span> {change.previousWork}
                 </p>
               </div>
             </div>
@@ -195,7 +195,7 @@ export function TechnicalChangesPanel() {
       {filteredChanges.length === 0 && (
         <div className="text-center py-12">
           <GitCommit className="h-12 w-12 text-muted-foreground mx-auto mb-3 opacity-50" />
-          <p className="text-sm text-muted-foreground">No se encontraron cambios</p>
+          <p className="text-sm text-muted-foreground">No changes found</p>
         </div>
       )}
     </Card>

@@ -11,42 +11,42 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 const documents = [
   {
     id: 1,
-    title: "Arquitectura del Sistema - Acme Corp",
+    title: "System Architecture - Acme Corp",
     client: "Acme Corporation",
     summary:
-      "Documentación completa de la arquitectura del sistema implementado. Incluye diagramas de flujo, estructura de base de datos y APIs disponibles.",
+      "Complete documentation of the implemented system architecture. Includes flow diagrams, database structure and available APIs.",
     lastUpdated: "2024-01-15",
-    type: "Arquitectura",
+    type: "Architecture",
     pages: 24,
   },
   {
     id: 2,
-    title: "Guía de Integración Slack API",
+    title: "Slack API Integration Guide",
     client: "TechStart SL",
     summary:
-      "Manual técnico para la integración con Slack. Detalla endpoints, autenticación OAuth y manejo de webhooks en tiempo real.",
+      "Technical manual for Slack integration. Details endpoints, OAuth authentication and real-time webhook handling.",
     lastUpdated: "2024-01-14",
-    type: "Integración",
+    type: "Integration",
     pages: 18,
   },
   {
     id: 3,
-    title: "Optimización de Base de Datos",
+    title: "Database Optimization",
     client: "Global Logistics",
     summary:
-      "Resumen de las optimizaciones aplicadas a las consultas de base de datos. Incluye índices creados y mejoras de rendimiento obtenidas.",
+      "Summary of optimizations applied to database queries. Includes created indexes and performance improvements obtained.",
     lastUpdated: "2024-01-13",
     type: "Performance",
     pages: 12,
   },
   {
     id: 4,
-    title: "Protocolo de Seguridad y Backups",
+    title: "Security Protocol and Backups",
     client: "Acme Corporation",
     summary:
-      "Documentación de medidas de seguridad implementadas y procedimientos de backup automático. Incluye plan de recuperación ante desastres.",
+      "Documentation of implemented security measures and automatic backup procedures. Includes disaster recovery plan.",
     lastUpdated: "2024-01-10",
-    type: "Seguridad",
+    type: "Security",
     pages: 32,
   },
 ]
@@ -69,12 +69,12 @@ export function DocumentationPanel() {
     <Card className="p-6 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-bold text-foreground">Documentación</h2>
-          <p className="text-sm text-muted-foreground mt-1">Con resúmenes generados por IA</p>
+          <h2 className="text-xl font-bold text-foreground">Documentation</h2>
+          <p className="text-sm text-muted-foreground mt-1">With AI-generated summaries</p>
         </div>
         <Button variant="outline" size="sm" className="gap-2 bg-transparent">
           <Download className="h-4 w-4" />
-          Exportar
+          Export
         </Button>
       </div>
 
@@ -83,7 +83,7 @@ export function DocumentationPanel() {
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Buscar documentación..."
+            placeholder="Search documentation..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-9"
@@ -93,10 +93,10 @@ export function DocumentationPanel() {
         <div className="grid grid-cols-2 gap-3">
           <Select value={selectedClient} onValueChange={setSelectedClient}>
             <SelectTrigger>
-              <SelectValue placeholder="Cliente" />
+              <SelectValue placeholder="Client" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Todos los clientes</SelectItem>
+              <SelectItem value="all">All clients</SelectItem>
               <SelectItem value="Acme Corporation">Acme Corporation</SelectItem>
               <SelectItem value="TechStart SL">TechStart SL</SelectItem>
               <SelectItem value="Global Logistics">Global Logistics</SelectItem>
@@ -105,14 +105,14 @@ export function DocumentationPanel() {
 
           <Select value={selectedType} onValueChange={setSelectedType}>
             <SelectTrigger>
-              <SelectValue placeholder="Tipo" />
+              <SelectValue placeholder="Type" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Todos los tipos</SelectItem>
-              <SelectItem value="Arquitectura">Arquitectura</SelectItem>
-              <SelectItem value="Integración">Integración</SelectItem>
+              <SelectItem value="all">All types</SelectItem>
+              <SelectItem value="Architecture">Architecture</SelectItem>
+              <SelectItem value="Integration">Integration</SelectItem>
               <SelectItem value="Performance">Performance</SelectItem>
-              <SelectItem value="Seguridad">Seguridad</SelectItem>
+              <SelectItem value="Security">Security</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -147,10 +147,10 @@ export function DocumentationPanel() {
                 <Badge variant="secondary" className="text-xs">
                   {doc.type}
                 </Badge>
-                <span className="text-xs text-muted-foreground">{doc.pages} páginas</span>
+                <span className="text-xs text-muted-foreground">{doc.pages} pages</span>
               </div>
               <span className="text-xs text-muted-foreground">
-                {new Date(doc.lastUpdated).toLocaleDateString("es-ES", {
+                {new Date(doc.lastUpdated).toLocaleDateString("en-US", {
                   day: "numeric",
                   month: "short",
                 })}
@@ -163,7 +163,7 @@ export function DocumentationPanel() {
       {filteredDocs.length === 0 && (
         <div className="text-center py-12">
           <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-3 opacity-50" />
-          <p className="text-sm text-muted-foreground">No se encontraron documentos</p>
+          <p className="text-sm text-muted-foreground">No documents found</p>
         </div>
       )}
     </Card>

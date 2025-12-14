@@ -14,10 +14,10 @@ interface Message {
 }
 
 const suggestedPrompts = [
-  "¿Cuáles son las últimas actualizaciones del cliente Acme?",
-  "Resumen de oportunidades de venta este mes",
-  "Muéstrame los cambios técnicos recientes",
-  "¿Qué obligaciones contractuales están pendientes?",
+  "What are the latest updates from the Acme client?",
+  "Summary of sales opportunities this month",
+  "Show me recent technical changes",
+  "What contractual obligations are pending?",
 ]
 
 export function AIChatbot() {
@@ -27,7 +27,7 @@ export function AIChatbot() {
       id: "1",
       role: "assistant",
       content:
-        "Hola, soy tu asistente de IA. Puedo ayudarte a encontrar información sobre clientes, reuniones, documentación técnica y mucho más. ¿En qué puedo ayudarte hoy?",
+        "Hello, I am your AI assistant. I can help you find information about clients, meetings, technical documentation and much more. How can I help you today?",
       timestamp: new Date(),
     },
   ])
@@ -76,20 +76,20 @@ export function AIChatbot() {
 
   const generateMockResponse = (query: string): string => {
     const lowerQuery = query.toLowerCase()
-    if (lowerQuery.includes("acme") || lowerQuery.includes("actualiz")) {
-      return "El cliente Acme Corporation tuvo una reunión el 15 de enero donde discutieron la expansión del sistema de inventario. Se identificaron 2 oportunidades: módulos de predicción de demanda y análisis avanzado. Además, el equipo técnico implementó caché Redis el 14 de enero, mejorando el rendimiento en un 60%."
-    } else if (lowerQuery.includes("oportunidad") || lowerQuery.includes("venta")) {
-      return "Este mes se han identificado 12 oportunidades de venta: 3 de alto potencial (Analytics Avanzado para Acme, Sistema de reportes para Global Logistics, y CRM personalizado) y 9 de medio potencial. Las áreas más solicitadas son: integraciones (40%), analytics (30%) y automatización (30%)."
-    } else if (lowerQuery.includes("técnic") || lowerQuery.includes("cambio")) {
-      return "Los cambios técnicos más recientes incluyen: implementación de caché Redis para Acme Corporation (14 ene), migración a API v3.0 para TechStart SL (13 ene), y optimización de queries de base de datos para Global Logistics (10 ene). Todos los cambios han sido documentados y traducidos a lenguaje no técnico."
+    if (lowerQuery.includes("acme") || lowerQuery.includes("update")) {
+      return "The Acme Corporation client had a meeting on January 15th where they discussed the expansion of the inventory system. 2 opportunities were identified: demand prediction modules and advanced analytics. In addition, the technical team implemented Redis cache on January 14th, improving performance by 60%."
+    } else if (lowerQuery.includes("opportunity") || lowerQuery.includes("sale")) {
+      return "This month 12 sales opportunities have been identified: 3 high potential (Advanced Analytics for Acme, Reporting System for Global Logistics, and Custom CRM) and 9 medium potential. The most requested areas are: integrations (40%), analytics (30%) and automation (30%)."
+    } else if (lowerQuery.includes("technical") || lowerQuery.includes("change")) {
+      return "The most recent technical changes include: Redis cache implementation for Acme Corporation (Jan 14), migration to API v3.0 for TechStart SL (Jan 13), and database query optimization for Global Logistics (Jan 10). All changes have been documented and translated into non-technical language."
     } else if (
       lowerQuery.includes("contractual") ||
-      lowerQuery.includes("obligac") ||
-      lowerQuery.includes("pendiente")
+      lowerQuery.includes("obligation") ||
+      lowerQuery.includes("pending")
     ) {
-      return "Obligaciones contractuales pendientes: Soporte 24/7 garantizado hasta Dic 2024 (prioridad alta), Migración de datos a completar antes de Q2 2024 (prioridad alta), y Auditoría mensual programada para el 25 de enero (prioridad media). Se recomienda revisar estas obligaciones con el equipo."
+      return "Pending contractual obligations: 24/7 support guaranteed until Dec 2024 (high priority), Data migration to be completed before Q2 2024 (high priority), and Monthly audit scheduled for January 25 (medium priority). It is recommended to review these obligations with the team."
     } else {
-      return "He procesado tu consulta. Puedo ayudarte con información sobre reuniones, clientes, documentación técnica, oportunidades de venta, obligaciones contractuales y mucho más. ¿Podrías ser más específico sobre qué información necesitas?"
+      return "I have processed your query. I can help you with information about meetings, clients, technical documentation, sales opportunities, contractual obligations and much more. Could you be more specific about what information you need?"
     }
   }
 
@@ -104,8 +104,8 @@ export function AIChatbot() {
                 <Bot className="h-6 w-6" />
               </div>
               <div>
-                <h3 className="font-semibold text-lg">Asistente IA</h3>
-                <p className="text-xs opacity-90">Siempre disponible para ayudarte</p>
+                <h3 className="font-semibold text-lg">AI Assistant</h3>
+                <p className="text-xs opacity-90">Always available to help you</p>
               </div>
             </div>
             <Button
@@ -153,7 +153,7 @@ export function AIChatbot() {
                 <div className="max-w-[85%] rounded-2xl p-4 bg-muted border border-border/50">
                   <div className="flex items-center gap-2">
                     <Loader2 className="h-4 w-4 animate-spin text-primary" />
-                    <span className="text-sm text-muted-foreground">Pensando...</span>
+                    <span className="text-sm text-muted-foreground">Thinking...</span>
                   </div>
                 </div>
               </div>
@@ -165,7 +165,7 @@ export function AIChatbot() {
           {/* Suggested Prompts */}
           {messages.length === 1 && (
             <div className="px-6 pb-3">
-              <p className="text-xs text-muted-foreground mb-3 font-medium">Sugerencias rápidas:</p>
+              <p className="text-xs text-muted-foreground mb-3 font-medium">Quick suggestions:</p>
               <div className="flex flex-col gap-2">
                 {suggestedPrompts.slice(0, 2).map((prompt, idx) => (
                   <button
@@ -187,7 +187,7 @@ export function AIChatbot() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                placeholder="Escribe tu pregunta..."
+                placeholder="Type your question..."
                 className="flex-1 h-12 rounded-xl"
                 disabled={isLoading}
               />

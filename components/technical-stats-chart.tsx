@@ -15,13 +15,13 @@ import {
 } from "recharts"
 
 const activityData = [
-  { name: "Lun", cambios: 12, errores: 2, mejoras: 8 },
-  { name: "Mar", cambios: 15, errores: 1, mejoras: 11 },
-  { name: "Mié", cambios: 8, errores: 3, mejoras: 5 },
-  { name: "Jue", cambios: 18, errores: 1, mejoras: 14 },
-  { name: "Vie", cambios: 14, errores: 2, mejoras: 9 },
-  { name: "Sáb", cambios: 5, errores: 0, mejoras: 4 },
-  { name: "Dom", cambios: 3, errores: 0, mejoras: 2 },
+  { name: "Mon", changes: 12, errors: 2, improvements: 8 },
+  { name: "Tue", changes: 15, errors: 1, improvements: 11 },
+  { name: "Wed", changes: 8, errors: 3, improvements: 5 },
+  { name: "Thu", changes: 18, errors: 1, improvements: 14 },
+  { name: "Fri", changes: 14, errors: 2, improvements: 9 },
+  { name: "Sat", changes: 5, errors: 0, improvements: 4 },
+  { name: "Sun", changes: 3, errors: 0, improvements: 2 },
 ]
 
 const performanceData = [
@@ -37,8 +37,8 @@ export function TechnicalStatsChart() {
       {/* Activity Chart */}
       <Card className="p-6 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
         <div className="mb-6">
-          <h3 className="text-lg font-semibold text-foreground">Actividad Semanal</h3>
-          <p className="text-sm text-muted-foreground mt-1">Cambios, errores y mejoras por día</p>
+          <h3 className="text-lg font-semibold text-foreground">Weekly Activity</h3>
+          <p className="text-sm text-muted-foreground mt-1">Changes, errors and improvements per day</p>
         </div>
         <ResponsiveContainer width="100%" height={280}>
           <BarChart data={activityData}>
@@ -54,9 +54,9 @@ export function TechnicalStatsChart() {
               }}
             />
             <Legend />
-            <Bar dataKey="cambios" fill="#6366f1" name="Cambios" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="errores" fill="#ef4444" name="Errores" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="mejoras" fill="#10b981" name="Mejoras" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="changes" fill="#6366f1" name="Changes" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="errors" fill="#ef4444" name="Errors" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="improvements" fill="#10b981" name="Improvements" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </Card>
@@ -64,8 +64,8 @@ export function TechnicalStatsChart() {
       {/* Performance Chart */}
       <Card className="p-6 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
         <div className="mb-6">
-          <h3 className="text-lg font-semibold text-foreground">Rendimiento del Sistema</h3>
-          <p className="text-sm text-muted-foreground mt-1">Tiempo de respuesta (ms) y uptime (%)</p>
+          <h3 className="text-lg font-semibold text-foreground">System Performance</h3>
+          <p className="text-sm text-muted-foreground mt-1">Response time (ms) and uptime (%)</p>
         </div>
         <ResponsiveContainer width="100%" height={280}>
           <LineChart data={performanceData}>
@@ -99,7 +99,7 @@ export function TechnicalStatsChart() {
               dataKey="responseTime"
               stroke="hsl(var(--primary))"
               strokeWidth={2}
-              name="Tiempo Respuesta"
+              name="Response Time"
               dot={{ fill: "hsl(var(--primary))" }}
             />
             <Line
