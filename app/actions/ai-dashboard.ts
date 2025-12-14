@@ -64,27 +64,43 @@ ESQUEMA DE RESPUESTA Y DISPLAY (Para el MODO 3):
 
 import { ZOOP_CONTEXT } from '@/app/data/context-zoop';
 
-export async function generateDashboardConfig(userMessage: string, contextUrl: string = 'https://l4pubebewf.execute-api.us-east-1.amazonaws.com/file?key=reporte_clienthub.txt') {
+export async function generateDashboardConfig(userMessage: string) {
   try {
     // 1. Initialize with local context as backup
     let contextText = ZOOP_CONTEXT;
 
-    // 2. Try to fetch fresh context from the new URL
-    if (contextUrl) {
-      try {
-        const response = await fetch(contextUrl, { cache: 'no-store' }); // Ensure fresh fetch
-        if (response.ok) {
-          const text = await response.text();
-          if (text && text.length > 50) { // Simple validation
-            contextText = text;
-            console.log("Using fetching context from:", contextUrl);
+    // 2. Try to fetch fresh context from uploaded files
+    try {
+      // First, get the list of files
+      const listResponse = await fetch('https://l4pubebewf.execute-api.us-east-1.amazonaws.com/files?folder=uploads', { cache: 'no-store' });
+      if (listResponse.ok) {
+        const files = await listResponse.json();
+        if (files && files.length > 0) {
+          let allContext = '';
+          // Fetch each file's content
+          for (const file of files) {
+            try {
+              const fileResponse = await fetch(`https://l4pubebewf.execute-api.us-east-1.amazonaws.com/file?key=${encodeURIComponent(file.Key)}`, { cache: 'no-store' });
+              if (fileResponse.ok) {
+                const fileText = await fileResponse.text();
+                if (fileText) {
+                  allContext += `\n--- Content from ${file.Key} ---\n${fileText}\n`;
+                }
+              }
+            } catch (fileError) {
+              console.error(`Error fetching file ${file.Key}:`, fileError);
+            }
           }
-        } else {
-          console.warn("Failed to fetch context, status:", response.status);
+          if (allContext.length > 50) { // Simple validation
+            contextText = allContext;
+            console.log("Using context from uploaded files");
+          }
         }
-      } catch (e) {
-        console.error("Error fetching context, using local backup", e);
+      } else {
+        console.warn("Failed to fetch file list, status:", listResponse.status);
       }
+    } catch (e) {
+      console.error("Error fetching context from files, using local backup", e);
     }
 
     const userPrompt = `Activa el MODO 3. Responde a la pregunta y genera la configuración de display óptima para el dashboard.

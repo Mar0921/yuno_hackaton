@@ -1,8 +1,9 @@
 "use client"
 import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 import { ClientSearch } from "@/components/client-search"
 import { PaymentProvidersPanel } from "@/components/payment-providers-panel"
-import { BarChart3, FileText, MessageSquare } from "lucide-react"
+import { BarChart3, FileText, MessageSquare, LogOut } from "lucide-react"
 
 interface HomePageProps {
   userRole: "sales" | "technical"
@@ -10,6 +11,7 @@ interface HomePageProps {
   onNavigateToDocuments: () => void
   onNavigateToChat: () => void
   onToggleRole: () => void
+  onLogout: () => void
 }
 
 export function HomePage({
@@ -18,6 +20,7 @@ export function HomePage({
   onNavigateToDocuments,
   onNavigateToChat,
   onToggleRole,
+  onLogout,
 }: HomePageProps) {
   return (
     <div className={`min-h-screen ${userRole === "sales" ? "bg-[#e2e8f1]" : "bg-[#e8e2f1]"} transition-colors duration-500`}>
@@ -29,7 +32,8 @@ export function HomePage({
                 <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
               </svg>
             </div>
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center justify-center">
+              <h1 className="text-xl font-semibold text-foreground mb-2">Effort</h1>
               <div className="role-toggle-slider group" onClick={onToggleRole}>
                 <div className="absolute inset-0 flex items-center justify-between px-4 z-10">
                   <span className={`role-toggle-label ${userRole === "sales" ? "active" : "inactive"}`}>
@@ -45,7 +49,10 @@ export function HomePage({
               </div>
             </div>
             <div className="flex justify-end">
-              <h1 className="text-xl font-semibold text-foreground">ClientHub</h1>
+              <Button onClick={onLogout} variant="outline" size="sm">
+                <LogOut className="h-4 w-4 mr-2" />
+                Logout
+              </Button>
             </div>
           </div>
         </div>

@@ -107,7 +107,7 @@ export function SalesClientsDashboard({ onBack }: SalesClientsDashboardProps) {
               <TrendingUp className="h-4 w-4 text-green-500" />
             </div>
             <div className="text-3xl font-bold text-foreground mb-1">8</div>
-            <p className="text-sm text-muted-foreground">Reuniones con este cliente</p>
+            <p className="text-sm text-muted-foreground">Meetings with this client</p>
           </Card>
 
           <Card className="p-6 border-border/50 hover:border-primary transition-all hover:shadow-lg hover:-translate-y-1">
@@ -118,7 +118,7 @@ export function SalesClientsDashboard({ onBack }: SalesClientsDashboardProps) {
               <TrendingUp className="h-4 w-4 text-green-500" />
             </div>
             <div className="text-3xl font-bold text-primary mb-1">3</div>
-            <p className="text-sm text-muted-foreground">Oportunidades activas</p>
+            <p className="text-sm text-muted-foreground">Active opportunities</p>
           </Card>
 
           <Card className="p-6 border-border/50 hover:border-primary transition-all hover:shadow-lg hover:-translate-y-1">
@@ -145,7 +145,7 @@ export function SalesClientsDashboard({ onBack }: SalesClientsDashboardProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <Card className="p-6 border-border/50 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
-            <h3 className="text-lg font-semibold text-foreground mb-6">Revenue Mensual del Cliente</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-6">Customer's monthly revenue</h3>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={clientMonthlyRevenue}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -165,7 +165,7 @@ export function SalesClientsDashboard({ onBack }: SalesClientsDashboardProps) {
           </Card>
 
           <Card className="p-6 border-border/50 hover:border-primary hover:-translate-y-1 transition-all hover:shadow-lg">
-            <h3 className="text-lg font-semibold text-foreground mb-6">Ventas por Categoría del Cliente</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-6">Sales by customer category</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={clientSalesByCategory}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />

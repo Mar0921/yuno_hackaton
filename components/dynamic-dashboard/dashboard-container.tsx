@@ -59,7 +59,7 @@ export function DynamicDashboardAndChat() {
             // Avoid double init if already populated (optional check)
             if (dashboardHistory.length > 0) return;
 
-            const initialPrompt = "Genera el Dashboard General del Merchant Overview de Zoop. Incluye los KPIs principales, los gráficos de ingresos y ventas por categoría, y los resúmenes de reuniones con sus tags y detalles.";
+            const initialPrompt = "Genera el Dashboard General del Merchant Overview. Incluye los KPIs principales, los gráficos de ingresos y ventas por categoría, y los resúmenes de reuniones con sus tags y detalles.";
 
             // We manually inject the user message 'state' but don't strictly need to show it in the chat history 
             // if we want it to feel 'native', but showing it puts context provided by user.
@@ -71,7 +71,7 @@ export function DynamicDashboardAndChat() {
                 if (response.display_config) {
                     const newEntry: DashboardEntry = {
                         id: 'init-0', // special ID
-                        query: "Dashboard General: Zoop", // Display text for the history item
+                        query: "Dashboard General: Merchant Overview", // Display text for the history item
                         timestamp: new Date(),
                         config: response.display_config,
                         businessAnswer: response.business_answer

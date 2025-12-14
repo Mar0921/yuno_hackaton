@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { GitCommit, Search, ChevronRight, Bug, Wrench, Sparkles } from "lucide-react"
+import { GitCommit, Search, Bug, Wrench, Sparkles } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 const changes = [
@@ -145,35 +145,32 @@ export function TechnicalChangesPanel() {
         {filteredChanges.map((change) => (
           <div
             key={change.id}
-            className="border border-border rounded-lg p-4 hover:border-primary transition-colors cursor-pointer group"
+            className="border border-border rounded-lg p-4"
           >
-            <div className="flex items-start justify-between mb-3">
-              <div className="flex items-start gap-3 flex-1">
-                <div
-                  className={`h-10 w-10 rounded-lg flex items-center justify-center shrink-0 ${
-                    change.type === "Error"
-                      ? "bg-destructive/10 text-destructive"
-                      : change.type === "Improvement"
-                        ? "bg-primary/10 text-primary"
-                        : "bg-muted text-foreground"
-                  }`}
-                >
-                  {getTypeIcon(change.type)}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors">
-                    {change.title}
-                  </h3>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {change.client} • {change.technician} •{" "}
-                    {new Date(change.date).toLocaleDateString("en-US", {
-                      day: "numeric",
-                      month: "short",
-                    })}
-                  </p>
-                </div>
+            <div className="flex items-start gap-3 mb-3">
+              <div
+                className={`h-10 w-10 rounded-lg flex items-center justify-center shrink-0 ${
+                  change.type === "Error"
+                    ? "bg-destructive/10 text-destructive"
+                    : change.type === "Improvement"
+                      ? "bg-primary/10 text-primary"
+                      : "bg-muted text-foreground"
+                }`}
+              >
+                {getTypeIcon(change.type)}
               </div>
-              <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold text-foreground text-sm">
+                  {change.title}
+                </h3>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {change.client} • {change.technician} •{" "}
+                  {new Date(change.date).toLocaleDateString("en-US", {
+                    day: "numeric",
+                    month: "short",
+                  })}
+                </p>
+              </div>
             </div>
 
             <div className="space-y-2 mb-3">
