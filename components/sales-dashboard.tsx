@@ -1,6 +1,10 @@
 "use client"
 
+import { useState } from "react"
 import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { ClientSearch } from "@/components/client-search"
+import { SalesClientsDashboard } from "@/components/sales-clients-dashboard"
 import { MeetingSummaries } from "@/components/meeting-summaries"
 import { InsightsPanel } from "@/components/insights-panel"
 import { HighlightsPanel } from "@/components/highlights-panel"
@@ -25,6 +29,12 @@ const salesByCategory = [
 ]
 
 export function SalesDashboard() {
+  const [view, setView] = useState<'dashboard' | 'clients'>('dashboard')
+
+  if (view === 'clients') {
+    return <SalesClientsDashboard onBack={() => setView('dashboard')} />
+  }
+
   return (
     <div className="container mx-auto px-6 py-16 max-w-7xl">
       <div className="text-center max-w-4xl mx-auto mb-20">
@@ -41,7 +51,7 @@ export function SalesDashboard() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-12">
         <Card className="p-6 border-border/50 hover:border-primary/30 transition-all hover:shadow-lg">
           <div className="flex items-center justify-between mb-3">
             <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -83,6 +93,17 @@ export function SalesDashboard() {
           </div>
           <div className="text-3xl font-bold text-foreground mb-1">$67K</div>
           <p className="text-sm text-muted-foreground">Revenue este mes</p>
+        </Card>
+
+        <Card className="p-6 border-border/50 hover:border-primary/30 transition-all hover:shadow-lg">
+          <div className="flex items-center justify-between mb-3">
+            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+              <Users className="h-5 w-5 text-primary" />
+            </div>
+          </div>
+          <Button onClick={() => setView('clients')} className="w-full">
+            Clientes
+          </Button>
         </Card>
       </div>
 
